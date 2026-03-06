@@ -1,4 +1,4 @@
 User-agent: *
 Allow: /
 
-Sitemap: https://aceitunadulce.es/sitemap-index.xml
+Sitemap: https://aceitunadulce.es/sitemap.xml
