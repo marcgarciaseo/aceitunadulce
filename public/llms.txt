@@ -1,0 +1,40 @@
+# Aceituna Dulce
+
+> Cafetería de especialidad y tostas artesanales en Atocha, Madrid.
+
+## Sobre nosotros
+
+Aceituna Dulce es una cafetería de especialidad ubicada en la Calle de Tortosa 4, 28045 Madrid, junto a la estación de Atocha. Ofrecemos más de 40 tostas artesanales elaboradas sobre pan de masa madre 100%, bowls saludables, açaí y café de especialidad.
+
+## Contacto
+
+- Dirección: C/ Tortosa 4, 28045 Madrid (junto a Atocha)
+- Teléfono: +34 632 59 58 68
+- Email: aceitunadulce.es@gmail.com
+- Instagram: @aceitunadulce
+- Web: https://aceitunadulce.es
+
+## Horario
+
+- Lunes a Sábado: 9:00 - 20:00
+- Domingos: 9:30 - 20:00
+
+## Servicios
+
+- WiFi gratuito
+- Accesible
+- Pago con efectivo y tarjeta
+
+## Carta
+
+### Tostas Saladas (29 variedades)
+Tumaca (3.50€), Avocate (7€), Mixta (7€), Vitalica (7€), Alegría (8€), Campestre (8€), Dulcetta (8€), Granjera (8€), Mediterránea (9€), Serranova (8€), Turry (8€), Ahumada (10€), Armonía (10€), Briole (10€), Cantabria (10€), Caprese (10€), Costera (10€), Sabra (10€), Atlántica (12€), Fresatte (12€), Ibérica (12€), Marinera (12€), Oceánica (12€), Salmary (12€), Salmore (12€), Serranía (12€), Suprema (12€), Tunali (12€), Vaquera (12€)
+
+### Tostas Dulces (7 variedades)
+Berry (4€), Exótica (7€), Mielitas (7€), Nutrely (7€), Pasión (7€), Deseo (8€), Fusión (8€)
+
+### Bowls (3 variedades)
+Frutella (9€), Açaí (10€), Caribean (10€)
+
+### Otras Especialidades (4 variedades)
+Nordik (10€), Tunalia (10€), Saladú (13€), Turkiss (13€)
