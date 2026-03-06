@@ -1,0 +1,124 @@
+---
+const categories = [
+  {
+    name: 'Tostas Saladas',
+    description: 'Pan tostado 100% masa madre con AOVE y harina ecologica',
+    items: [
+      { name: 'Tumaca', desc: 'Tosta con tomate', price: '3' },
+      { name: 'Avocate', desc: 'Tosta con aguacate', price: '7' },
+      { name: 'Mixta', desc: 'Jamon de pavo y queso amarillo', price: '7' },
+      { name: 'Vitalica', desc: 'Queso crema, aguacate y olivas', price: '7' },
+      { name: 'Alegria', desc: 'Queso ricotta y huevo poche', price: '8' },
+      { name: 'Campestre', desc: 'Pate iberico y huevo poche', price: '8' },
+      { name: 'Dulcetta', desc: 'Tomate cherry confitado y queso ricotta', price: '8' },
+      { name: 'Granjera', desc: 'Aguacate y huevo poche', price: '8' },
+      { name: 'Mediterranea', desc: 'Jamon de pavo, queso y pesto', price: '8' },
+      { name: 'Serranova', desc: 'Jamon serrano y tomate rallado', price: '8' },
+      { name: 'Turry', desc: 'Tomate y queso burrata', price: '8' },
+      { name: 'Ahumada', desc: 'Salmon ahumado y hierbecitas', price: '10' },
+      { name: 'Armonia', desc: 'Queso ricotta, tomate y pesto', price: '10' },
+      { name: 'Briole', desc: 'Jamon serrano, queso y miel', price: '10' },
+      { name: 'Cantabria', desc: 'Atun, queso, tomate y huevo', price: '10' },
+      { name: 'Caprese', desc: 'Mozzarella y pesto', price: '10' },
+      { name: 'Costera', desc: 'Atun y yogur griego', price: '10' },
+      { name: 'Sabra', desc: 'Hummus y huevo poche', price: '10' },
+      { name: 'Atlantica', desc: 'Atun y aguacate', price: '12' },
+      { name: 'Fresatte', desc: 'Queso burrata, aguacate y fresas', price: '12' },
+      { name: 'Iberica', desc: 'Aguacate, jamon y huevo poche', price: '12' },
+      { name: 'Marinera', desc: 'Salmon, aguacate y huevo poche', price: '12' },
+      { name: 'Oceanica', desc: 'Camarones al ajillo y queso ricotta', price: '12' },
+      { name: 'Salmary', desc: 'Salmon, huevo y vegetales', price: '12' },
+      { name: 'Salmore', desc: 'Salmon y aguacate', price: '12' },
+      { name: 'Serrania', desc: 'Jamon serrano y huevo poche', price: '12' },
+      { name: 'Suprema', desc: 'Pollo a la parmesana y aguacate', price: '12' },
+      { name: 'Tunali', desc: 'Atun y huevo duro', price: '12' },
+      { name: 'Vaquera', desc: 'Carne y aguacate', price: '12' },
+    ],
+  },
+  {
+    name: 'Tostas Dulces',
+    description: 'Para los que prefieren el lado dulce de la vida',
+    items: [
+      { name: 'Berry', desc: 'Mermelada de frutos rojos', price: '4' },
+      { name: 'Exotica', desc: 'Mango, banana y crema de cacahuete', price: '7' },
+      { name: 'Mielitas', desc: 'Tortitas con frutos rojos, platano y miel', price: '7' },
+      { name: 'Nutrely', desc: 'Queso crema y frutos secos', price: '7' },
+      { name: 'Pasion', desc: 'Queso crema y fresas', price: '7' },
+      { name: 'Deseo', desc: 'Mascarpone y frutos del bosque', price: '8' },
+      { name: 'Fusion', desc: 'Labne y frutas', price: '8' },
+    ],
+  },
+  {
+    name: 'Bowls',
+    description: 'Bowls saludables con ingredientes frescos y naturales',
+    items: [
+      { name: 'Frutella', desc: 'Yogur, platano, granola y frutos rojos', price: '9' },
+      { name: 'Acai', desc: 'Acai, platano, frutos rojos y granola', price: '10' },
+      { name: 'Caribean', desc: 'Yogur de chocolate, granola, banana y kiwi', price: '10' },
+    ],
+  },
+  {
+    name: 'Otras Especialidades',
+    description: 'Tartares, ensaladas y platos unicos',
+    items: [
+      { name: 'Nordik', desc: 'Tartar de salmon ahumado y aguacate', price: '10' },
+      { name: 'Tunalia', desc: 'Tartar de atun y aguacate', price: '10' },
+      { name: 'Saladu', desc: 'Ensalada de frutas con vegetales y jamon', price: '13' },
+      { name: 'Turkiss', desc: 'Huevos turcos (cilbir)', price: '13' },
+    ],
+  },
+];
+---
+
+<section id="carta" class="py-24 bg-olive-50/50">
+  <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+    <div class="text-center mb-16">
+      <span class="text-olive-500 text-sm font-medium tracking-widest uppercase">Nuestra carta</span>
+      <h2 class="font-heading text-4xl sm:text-5xl font-bold text-olive-900 mt-2">
+        El sabor de la tosta
+      </h2>
+      <p class="text-olive-600/70 mt-4 max-w-2xl mx-auto">
+        Todas nuestras tostas estan elaboradas con pan 100% masa madre,
+        aceite de oliva virgen extra y los mejores ingredientes frescos.
+      </p>
+    </div>
+
+    <div class="space-y-16">
+      {categories.map((category) => (
+        <div>
+          <div class="mb-8 pb-4 border-b border-olive-200">
+            <h3 class="font-heading text-3xl font-bold text-olive-800">{category.name}</h3>
+            <p class="text-olive-500 text-sm mt-1">{category.description}</p>
+          </div>
+
+          <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-x-8 gap-y-4">
+            {category.items.map((item) => (
+              <div class="flex items-baseline justify-between py-2 group">
+                <div class="flex-1 min-w-0 pr-4">
+                  <span class="font-heading text-lg font-semibold text-olive-800 group-hover:text-olive-600 transition-colors">
+                    {item.name}
+                  </span>
+                  <span class="block text-sm text-olive-500 truncate">{item.desc}</span>
+                </div>
+                <span class="font-heading text-lg font-bold text-olive-600 shrink-0">
+                  {item.price}&euro;
+                </span>
+              </div>
+            ))}
+          </div>
+        </div>
+      ))}
+    </div>
+
+    <div class="mt-16 text-center">
+      <div class="inline-flex items-center gap-3 bg-white rounded-2xl px-8 py-4 shadow-sm border border-olive-100">
+        <svg class="w-5 h-5 text-olive-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/>
+        </svg>
+        <p class="text-sm text-olive-600">
+          Consulta alergenos e intolerancias con nuestro personal. Opciones veganas y vegetarianas disponibles.
+        </p>
+      </div>
+    </div>
+  </div>
+</section>

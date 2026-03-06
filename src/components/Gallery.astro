@@ -1,0 +1,103 @@
+---
+const images = [
+  { src: '/images/foto-16.jpeg', alt: 'Tostas de aguacate y fresas con queso crema' },
+  { src: '/images/foto-29.jpeg', alt: 'Tosta caprese con tomate y mozzarella' },
+  { src: '/images/foto-1.jpeg', alt: 'Bowl de granola con fruta fresca y miel' },
+  { src: '/images/foto-27.jpeg', alt: 'Tosta iberica con huevos poche y jamon' },
+  { src: '/images/foto-18.jpeg', alt: 'Gofres con frutos rojos y miel' },
+  { src: '/images/foto-13.jpeg', alt: 'Tartar de atun y aguacate' },
+  { src: '/images/foto-26.jpeg', alt: 'Fachada exterior de Aceituna Dulce en Atocha' },
+  { src: '/images/foto-8.jpeg', alt: 'Tosta vaquera con carne y aguacate' },
+  { src: '/images/foto-22.jpeg', alt: 'Brownie con helado de vainilla' },
+  { src: '/images/foto-7.jpeg', alt: 'Tosta de aguacate con rabanitos y microgreens' },
+  { src: '/images/foto-28.jpeg', alt: 'Cafe latte art en mesa con planta' },
+  { src: '/images/foto-21.jpeg', alt: 'Gofres de chocolate con sirope' },
+];
+---
+
+<section id="galeria" class="py-24 bg-cream-50">
+  <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+    <div class="text-center mb-16">
+      <span class="text-olive-500 text-sm font-medium tracking-widest uppercase">Galeria</span>
+      <h2 class="font-heading text-4xl sm:text-5xl font-bold text-olive-900 mt-2">
+        Hechos para disfrutar
+      </h2>
+      <p class="text-olive-600/70 mt-4 max-w-2xl mx-auto">
+        Cada plato es una obra de arte. Ingredientes frescos, presentaciones cuidadas
+        y mucho amor en cada preparacion.
+      </p>
+    </div>
+
+    <div class="columns-1 sm:columns-2 lg:columns-3 gap-4 space-y-4">
+      {images.map((img, i) => (
+        <div class="break-inside-avoid group relative overflow-hidden rounded-2xl shadow-md hover:shadow-xl transition-shadow duration-300">
+          <button type="button" class="lightbox-trigger cursor-zoom-in block w-full text-left" data-src={img.src} data-alt={img.alt}>
+            <img
+              src={img.src}
+              alt={img.alt}
+              class="w-full object-cover group-hover:scale-105 transition-transform duration-500"
+              loading="lazy"
+            />
+            <div class="absolute inset-0 bg-gradient-to-t from-olive-950/50 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+              <p class="absolute bottom-4 left-4 right-4 text-white text-sm font-medium">
+                {img.alt}
+              </p>
+            </div>
+          </button>
+        </div>
+      ))}
+    </div>
+  </div>
+
+  <!-- Lightbox modal -->
+  <div id="lightbox" class="fixed inset-0 z-50 hidden items-center justify-center bg-black/90 backdrop-blur-sm cursor-zoom-out" role="dialog" aria-modal="true" aria-label="Imagen ampliada">
+    <button id="lightbox-close" class="absolute top-5 right-5 text-white/70 hover:text-white transition-colors z-10" aria-label="Cerrar imagen">
+      <svg class="w-8 h-8" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+        <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12"/>
+      </svg>
+    </button>
+    <img id="lightbox-img" src="" alt="" class="max-w-[90vw] max-h-[90vh] object-contain rounded-lg shadow-2xl" />
+  </div>
+
+  <script>
+    document.addEventListener('astro:page-load', () => {
+      const lightbox = document.getElementById('lightbox');
+      const lightboxImg = document.getElementById('lightbox-img') as HTMLImageElement;
+      if (!lightbox || !lightboxImg) return;
+
+      function openLightbox(src: string, alt: string) {
+        lightboxImg.src = src;
+        lightboxImg.alt = alt;
+        lightbox!.classList.remove('hidden');
+        lightbox!.classList.add('flex');
+        document.body.style.overflow = 'hidden';
+      }
+
+      function closeLightbox() {
+        lightbox!.classList.add('hidden');
+        lightbox!.classList.remove('flex');
+        lightboxImg.src = '';
+        document.body.style.overflow = '';
+      }
+
+      document.querySelectorAll('.lightbox-trigger').forEach(trigger => {
+        trigger.addEventListener('click', () => {
+          const el = trigger as HTMLElement;
+          openLightbox(el.dataset.src || '', el.dataset.alt || '');
+        });
+      });
+
+      lightbox.addEventListener('click', (e) => {
+        if (e.target === lightbox || (e.target as HTMLElement).closest('#lightbox-close')) {
+          closeLightbox();
+        }
+      });
+
+      document.addEventListener('keydown', (e) => {
+        if (e.key === 'Escape' && !lightbox.classList.contains('hidden')) {
+          closeLightbox();
+        }
+      });
+    });
+  </script>
+</section>

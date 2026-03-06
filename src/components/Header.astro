@@ -1,0 +1,113 @@
+---
+const navLinks = [
+  { href: '#inicio', label: 'Inicio' },
+  { href: '#nosotros', label: 'Nosotros' },
+  { href: '#carta', label: 'Carta' },
+  { href: '#galeria', label: 'Galeria' },
+  { href: '#contacto', label: 'Contacto' },
+];
+---
+
+<header
+  id="main-header"
+  class="fixed top-0 left-0 right-0 z-50 transition-all duration-300 bg-cream-50/95 backdrop-blur-md shadow-sm"
+>
+  <nav class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+    <div class="flex h-20 items-center justify-between">
+      <a href="#inicio" class="flex items-center gap-3 group">
+        <img
+          src="/images/logo.png"
+          alt="Aceituna Dulce"
+          width="48"
+          height="48"
+          class="h-12 w-auto transition-transform duration-300 group-hover:scale-105"
+        />
+        <div class="hidden sm:block">
+          <span class="block font-heading text-xl font-semibold text-olive-800 leading-tight">
+            Aceituna Dulce
+          </span>
+          <span class="block text-xs text-olive-500 tracking-wider uppercase">
+            el sabor de la tosta
+          </span>
+        </div>
+      </a>
+
+      <ul class="hidden md:flex items-center gap-8">
+        {navLinks.map((link) => (
+          <li>
+            <a
+              href={link.href}
+              class="text-sm font-medium text-olive-700 hover:text-olive-500 transition-colors duration-200 tracking-wide uppercase"
+            >
+              {link.label}
+            </a>
+          </li>
+        ))}
+      </ul>
+
+      <button
+        id="mobile-menu-btn"
+        class="md:hidden flex flex-col gap-1.5 p-2"
+        aria-label="Abrir menu"
+        aria-expanded="false"
+      >
+        <span class="block w-6 h-0.5 bg-olive-700 transition-all duration-300 origin-center" id="bar1"></span>
+        <span class="block w-6 h-0.5 bg-olive-700 transition-all duration-300" id="bar2"></span>
+        <span class="block w-6 h-0.5 bg-olive-700 transition-all duration-300 origin-center" id="bar3"></span>
+      </button>
+    </div>
+
+    <div id="mobile-menu" class="md:hidden max-h-0 overflow-hidden transition-all duration-300">
+      <ul class="pb-6 pt-2 space-y-1">
+        {navLinks.map((link) => (
+          <li>
+            <a
+              href={link.href}
+              class="block py-3 px-2 text-sm font-medium text-olive-700 hover:text-olive-500 hover:bg-olive-50 rounded-lg transition-colors duration-200 tracking-wide uppercase"
+            >
+              {link.label}
+            </a>
+          </li>
+        ))}
+      </ul>
+    </div>
+  </nav>
+</header>
+
+<script>
+  const btn = document.getElementById('mobile-menu-btn');
+  const menu = document.getElementById('mobile-menu');
+  const bar1 = document.getElementById('bar1');
+  const bar2 = document.getElementById('bar2');
+  const bar3 = document.getElementById('bar3');
+
+  btn?.addEventListener('click', () => {
+    const isOpen = menu?.classList.contains('max-h-96');
+    if (isOpen) {
+      menu?.classList.remove('max-h-96');
+      menu?.classList.add('max-h-0');
+      bar1?.classList.remove('rotate-45', 'translate-y-[4px]');
+      bar2?.classList.remove('opacity-0');
+      bar3?.classList.remove('-rotate-45', '-translate-y-[4px]');
+      btn.setAttribute('aria-expanded', 'false');
+    } else {
+      menu?.classList.remove('max-h-0');
+      menu?.classList.add('max-h-96');
+      bar1?.classList.add('rotate-45', 'translate-y-[4px]');
+      bar2?.classList.add('opacity-0');
+      bar3?.classList.add('-rotate-45', '-translate-y-[4px]');
+      btn.setAttribute('aria-expanded', 'true');
+    }
+  });
+
+  document.querySelectorAll('#mobile-menu a').forEach((link) => {
+    link.addEventListener('click', () => {
+      menu?.classList.remove('max-h-96');
+      menu?.classList.add('max-h-0');
+      bar1?.classList.remove('rotate-45', 'translate-y-[4px]');
+      bar2?.classList.remove('opacity-0');
+      bar3?.classList.remove('-rotate-45', '-translate-y-[4px]');
+      btn?.setAttribute('aria-expanded', 'false');
+    });
+  });
+</script>

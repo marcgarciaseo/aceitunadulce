@@ -1,0 +1,193 @@
+---
+import '../styles/global.css';
+import Header from '../components/Header.astro';
+import Footer from '../components/Footer.astro';
+
+interface Props {
+  title: string;
+  description: string;
+}
+
+const { title, description } = Astro.props;
+const canonicalURL = new URL(Astro.url.pathname, Astro.site);
+---
+
+<!doctype html>
+<html lang="es">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link rel="icon" type="image/png" href="/images/logo.png" />
+    <link rel="canonical" href={canonicalURL} />
+
+    <title>{title}</title>
+    <meta name="description" content={description} />
+
+    <meta name="robots" content="index, follow" />
+    <meta name="geo.region" content="ES-MD" />
+    <meta name="geo.placename" content="Madrid" />
+    <meta name="geo.position" content="40.4065;-3.6932" />
+    <meta name="ICBM" content="40.4065, -3.6932" />
+
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={description} />
+    <meta property="og:url" content={canonicalURL} />
+    <meta property="og:type" content="website" />
+    <meta property="og:image" content="https://aceitunadulce.es/images/foto-16.jpeg" />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+    <meta property="og:locale" content="es_ES" />
+    <meta property="og:site_name" content="Aceituna Dulce" />
+
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content={title} />
+    <meta name="twitter:description" content={description} />
+    <meta name="twitter:image" content="https://aceitunadulce.es/images/foto-16.jpeg" />
+
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=DM+Sans:wght@400;500;600;700&display=swap"
+      rel="stylesheet"
+    />
+
+    <script type="application/ld+json" set:html={JSON.stringify({
+      "@context": "https://schema.org",
+      "@type": "Restaurant",
+      "@id": "https://aceitunadulce.es/#restaurant",
+      "name": "Aceituna Dulce",
+      "alternateName": "Aceituna Dulce - Specialty Coffee",
+      "description": "Cafeteria de especialidad en Atocha, Madrid. Mas de 40 tostas artesanales sobre pan masa madre, bowls de granola, brunch saludable y cafe de especialidad.",
+      "image": [
+        "https://aceitunadulce.es/images/logo.png",
+        "https://aceitunadulce.es/images/foto-9.jpeg",
+        "https://aceitunadulce.es/images/foto-25.jpeg",
+        "https://aceitunadulce.es/images/foto-2.jpeg"
+      ],
+      "url": "https://aceitunadulce.es/",
+      "telephone": "+34632595868",
+      "email": "aceitunadulce.es@gmail.com",
+      "address": {
+        "@type": "PostalAddress",
+        "streetAddress": "Calle de Tortosa, 4",
+        "addressLocality": "Madrid",
+        "addressRegion": "Comunidad de Madrid",
+        "postalCode": "28045",
+        "addressCountry": "ES"
+      },
+      "geo": {
+        "@type": "GeoCoordinates",
+        "latitude": 40.4065,
+        "longitude": -3.6932
+      },
+      "areaServed": {
+        "@type": "City",
+        "name": "Madrid"
+      },
+      "servesCuisine": ["Tostas artesanales", "Cafe de especialidad", "Brunch", "Bowls saludables"],
+      "priceRange": "€€",
+      "currenciesAccepted": "EUR",
+      "paymentAccepted": "Efectivo, Tarjeta de credito, Tarjeta de debito",
+      "openingHoursSpecification": [
+        {
+          "@type": "OpeningHoursSpecification",
+          "dayOfWeek": ["Monday","Tuesday","Wednesday","Thursday","Friday","Saturday"],
+          "opens": "09:00",
+          "closes": "20:00"
+        },
+        {
+          "@type": "OpeningHoursSpecification",
+          "dayOfWeek": "Sunday",
+          "opens": "09:30",
+          "closes": "20:00"
+        }
+      ],
+      "hasMenu": {
+        "@type": "Menu",
+        "name": "Carta de Aceituna Dulce",
+        "url": "https://aceitunadulce.es/#carta",
+        "hasMenuSection": [
+          {
+            "@type": "MenuSection",
+            "name": "Tostas Saladas",
+            "description": "Pan tostado 100% masa madre con AOVE y harina ecologica",
+            "hasMenuItem": [
+              { "@type": "MenuItem", "name": "Tumaca", "description": "Tosta con tomate", "offers": { "@type": "Offer", "price": "3", "priceCurrency": "EUR" } },
+              { "@type": "MenuItem", "name": "Avocate", "description": "Tosta con aguacate", "offers": { "@type": "Offer", "price": "7", "priceCurrency": "EUR" } },
+              { "@type": "MenuItem", "name": "Granjera", "description": "Aguacate y huevo poche", "offers": { "@type": "Offer", "price": "8", "priceCurrency": "EUR" } },
+              { "@type": "MenuItem", "name": "Iberica", "description": "Aguacate, jamon y huevo poche", "offers": { "@type": "Offer", "price": "12", "priceCurrency": "EUR" } },
+              { "@type": "MenuItem", "name": "Marinera", "description": "Salmon, aguacate y huevo poche", "offers": { "@type": "Offer", "price": "12", "priceCurrency": "EUR" } },
+              { "@type": "MenuItem", "name": "Oceanica", "description": "Camarones al ajillo y queso ricotta", "offers": { "@type": "Offer", "price": "12", "priceCurrency": "EUR" } }
+            ]
+          },
+          {
+            "@type": "MenuSection",
+            "name": "Tostas Dulces",
+            "description": "Para los que prefieren el lado dulce de la vida",
+            "hasMenuItem": [
+              { "@type": "MenuItem", "name": "Berry", "description": "Mermelada de frutos rojos", "offers": { "@type": "Offer", "price": "4", "priceCurrency": "EUR" } },
+              { "@type": "MenuItem", "name": "Deseo", "description": "Mascarpone y frutos del bosque", "offers": { "@type": "Offer", "price": "8", "priceCurrency": "EUR" } },
+              { "@type": "MenuItem", "name": "Fusion", "description": "Labne y frutas", "offers": { "@type": "Offer", "price": "8", "priceCurrency": "EUR" } }
+            ]
+          },
+          {
+            "@type": "MenuSection",
+            "name": "Bowls",
+            "description": "Bowls saludables con ingredientes frescos y naturales",
+            "hasMenuItem": [
+              { "@type": "MenuItem", "name": "Frutella", "description": "Yogur, platano, granola y frutos rojos", "offers": { "@type": "Offer", "price": "9", "priceCurrency": "EUR" } },
+              { "@type": "MenuItem", "name": "Acai", "description": "Acai, platano, frutos rojos y granola", "offers": { "@type": "Offer", "price": "10", "priceCurrency": "EUR" } }
+            ]
+          }
+        ]
+      },
+      "sameAs": [
+        "https://instagram.com/aceitunadulce",
+        "https://www.google.com/maps/place/Aceituna+dulce+-+Specialty+Coffee/"
+      ],
+      "amenityFeature": [
+        { "@type": "LocationFeatureSpecification", "name": "WiFi gratuito", "value": true },
+        { "@type": "LocationFeatureSpecification", "name": "Terraza", "value": false },
+        { "@type": "LocationFeatureSpecification", "name": "Accesible", "value": true }
+      ],
+      "keywords": "cafeteria de especialidad en Atocha, tostas artesanales Madrid, brunch Atocha, cafe de especialidad Madrid, bowls saludables Atocha"
+    })} />
+
+    <script type="application/ld+json" set:html={JSON.stringify({
+      "@context": "https://schema.org",
+      "@type": "WebSite",
+      "@id": "https://aceitunadulce.es/#website",
+      "name": "Aceituna Dulce",
+      "url": "https://aceitunadulce.es/",
+      "description": "Cafeteria de especialidad en Atocha, Madrid. Tostas artesanales, bowls, brunch y cafe de especialidad.",
+      "publisher": {
+        "@type": "Organization",
+        "name": "Aceituna Dulce",
+        "logo": {
+          "@type": "ImageObject",
+          "url": "https://aceitunadulce.es/images/logo.png"
+        }
+      }
+    })} />
+
+    <script type="application/ld+json" set:html={JSON.stringify({
+      "@context": "https://schema.org",
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        {
+          "@type": "ListItem",
+          "position": 1,
+          "name": "Inicio",
+          "item": "https://aceitunadulce.es/"
+        }
+      ]
+    })} />
+  </head>
+  <body class="antialiased">
+    <Header />
+    <main>
+      <slot />
+    </main>
+    <Footer />
+  </body>
+</html>
