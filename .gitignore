@@ -28,3 +28,6 @@ fotos local y platos/
 
 # claude settings
 .claude/
+
+# Local Netlify folder
+.netlify
