@@ -1,0 +1,555 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Prueba Heroes — Aceituna Dulce</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          fontFamily: {
+            playfair: ["'Playfair Display'", "serif"],
+            cormorant: ["'Cormorant Garamond'", "serif"],
+            fraunces: ["'Fraunces'", "serif"],
+            instrument: ["'Instrument Serif'", "serif"],
+            baskerville: ["'Libre Baskerville'", "serif"],
+            syne: ["'Syne'", "sans-serif"],
+            mono: ["'Space Mono'", "monospace"],
+            outfit: ["'Outfit'", "sans-serif"],
+            sans: ["'DM Sans'", "system-ui", "sans-serif"],
+          }
+        }
+      }
+    }
+  </script>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;0,800;0,900;1,400;1,500;1,600;1,700&family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400;1,500&family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,400;0,9..144,500;0,9..144,600;0,9..144,700;0,9..144,800;0,9..144,900;1,9..144,300;1,9..144,400;1,9..144,500&family=Space+Mono:wght@400;700&family=Instrument+Serif:ital@0;1&family=DM+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400&family=Outfit:wght@200;300;400;500;600;700;800;900&family=Syne:wght@400;500;600;700;800&family=Libre+Baskerville:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet" />
+  <style>
+    html { scroll-behavior: smooth; }
+    body { font-family: 'DM Sans', system-ui, sans-serif; }
+    .scrollbar-hide { -ms-overflow-style: none; scrollbar-width: none; }
+    .scrollbar-hide::-webkit-scrollbar { display: none; }
+
+    .marquee-track { display: flex; overflow: hidden; }
+    .marquee-content { display: flex; align-items: center; animation: marquee 20s linear infinite; white-space: nowrap; }
+    @keyframes marquee { 0% { transform: translateX(0); } 100% { transform: translateX(-50%); } }
+
+    .marquee-reverse .marquee-content { animation-direction: reverse; animation-duration: 28s; }
+
+    .hero-nav-btn.active { background: rgba(154,170,111,0.5); border-color: rgba(154,170,111,0.6); }
+  </style>
+</head>
+<body class="antialiased bg-neutral-950 text-white">
+
+  <!-- ===== NAV FIJA ===== -->
+  <nav class="fixed top-0 left-0 right-0 z-[200] bg-black/90 backdrop-blur-xl border-b border-white/10">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 py-3 flex items-center justify-between">
+      <span class="font-instrument text-lg text-white font-medium">Pruebas Hero</span>
+      <div class="flex gap-1.5 text-xs flex-wrap justify-end">
+        <a href="#h1" class="hero-nav-btn bg-white/10 hover:bg-white/25 px-3 py-1.5 rounded-full transition border border-white/5 font-semibold" data-hero="1">1</a>
+        <a href="#h2" class="hero-nav-btn bg-white/10 hover:bg-white/25 px-3 py-1.5 rounded-full transition border border-white/5 font-semibold" data-hero="2">2</a>
+        <a href="#h3" class="hero-nav-btn bg-white/10 hover:bg-white/25 px-3 py-1.5 rounded-full transition border border-white/5 font-semibold" data-hero="3">3</a>
+        <a href="#h4" class="hero-nav-btn bg-white/10 hover:bg-white/25 px-3 py-1.5 rounded-full transition border border-white/5 font-semibold" data-hero="4">4</a>
+        <a href="#h5" class="hero-nav-btn bg-white/10 hover:bg-white/25 px-3 py-1.5 rounded-full transition border border-white/5 font-semibold" data-hero="5">5</a>
+        <a href="#h6" class="hero-nav-btn bg-white/10 hover:bg-white/25 px-3 py-1.5 rounded-full transition border border-white/5 font-semibold" data-hero="6">6</a>
+        <a href="#h7" class="hero-nav-btn bg-white/10 hover:bg-white/25 px-3 py-1.5 rounded-full transition border border-white/5 font-semibold" data-hero="7">7</a>
+        <a href="#h8" class="hero-nav-btn bg-white/10 hover:bg-white/25 px-3 py-1.5 rounded-full transition border border-white/5 font-semibold" data-hero="8">8</a>
+        <a href="#h9" class="hero-nav-btn bg-white/10 hover:bg-white/25 px-3 py-1.5 rounded-full transition border border-white/5 font-semibold" data-hero="9">9</a>
+        <a href="#h10" class="hero-nav-btn bg-white/10 hover:bg-white/25 px-3 py-1.5 rounded-full transition border border-white/5 font-semibold" data-hero="10">10</a>
+      </div>
+    </div>
+  </nav>
+
+
+  <!-- ================================================================ -->
+  <!-- HERO 1: CINEMATICO OSCURO — Texto izquierda, foto derecha        -->
+  <!-- ================================================================ -->
+  <section id="h1" class="hero-section relative min-h-screen overflow-hidden scroll-mt-14 bg-black">
+    <div class="absolute top-16 left-4 z-50 bg-white text-black text-[10px] font-bold px-3 py-1.5 rounded-full">V1 — Cinematico Oscuro</div>
+
+    <!-- BG sutil -->
+    <div class="absolute inset-0">
+      <img src="/images/foto-25.jpeg" alt="" class="w-full h-full object-cover opacity-15" />
+      <div class="absolute inset-0 bg-gradient-to-r from-black via-black/95 to-black/50"></div>
+    </div>
+
+    <div class="relative z-10 min-h-screen flex items-center px-6 sm:px-12 lg:px-20">
+      <div class="w-full max-w-7xl mx-auto grid grid-cols-1 lg:grid-cols-2 gap-12 items-center py-28">
+        <div>
+          <p class="font-outfit text-sm font-semibold tracking-[0.35em] uppercase text-emerald-400 mb-6">Specialty Coffee & Tostas</p>
+          <h1 class="font-playfair text-6xl sm:text-7xl lg:text-8xl font-black text-white leading-[0.85] mb-2">Aceituna</h1>
+          <h1 class="font-playfair text-6xl sm:text-7xl lg:text-8xl italic font-medium text-emerald-300 leading-[0.85] mb-8">Dulce</h1>
+          <div class="flex items-center gap-4 mb-8">
+            <div class="h-[2px] w-16 bg-emerald-400"></div>
+            <p class="font-outfit text-white/70 text-base max-w-md">Junto a Atocha, Madrid. 40+ tostas artesanales sobre pan masa madre, bowls y cafe de especialidad.</p>
+          </div>
+          <div class="flex flex-wrap gap-4">
+            <a href="#" class="group inline-flex items-center gap-3 px-8 py-4 bg-emerald-500 text-black text-xs tracking-[0.2em] uppercase font-bold rounded-full hover:bg-emerald-400 transition-all">
+              Descubrir la carta
+              <svg class="w-4 h-4 group-hover:translate-x-1 transition-transform" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M17 8l4 4m0 0l-4 4m4-4H3"/></svg>
+            </a>
+            <a href="#" class="inline-flex items-center gap-2 px-8 py-4 border-2 border-white/40 text-white text-xs tracking-[0.2em] uppercase font-bold rounded-full hover:bg-white/10 transition-all">Como llegar</a>
+          </div>
+        </div>
+        <div class="relative hidden lg:block">
+          <div class="aspect-[3/4] rounded-3xl overflow-hidden shadow-2xl ring-1 ring-white/10">
+            <img src="/images/foto-16.jpeg" alt="Tostas" class="w-full h-full object-cover hover:scale-105 transition-transform duration-700" />
+          </div>
+          <div class="absolute -bottom-5 -left-5 bg-emerald-500 text-black px-6 py-4 rounded-2xl shadow-xl">
+            <p class="font-playfair text-3xl font-bold">40+</p>
+            <p class="font-outfit text-[10px] tracking-wider uppercase font-bold">Tostas artesanales</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+
+  <!-- ================================================================ -->
+  <!-- HERO 2: EDITORIAL SPLIT — Revista, asimetrico                    -->
+  <!-- ================================================================ -->
+  <section id="h2" class="hero-section relative min-h-screen overflow-hidden scroll-mt-14 bg-[#f5f1e8]">
+    <div class="absolute top-16 left-4 z-50 bg-black text-white text-[10px] font-bold px-3 py-1.5 rounded-full">V2 — Editorial Split</div>
+
+    <div class="relative z-10 min-h-screen grid grid-cols-1 lg:grid-cols-2">
+      <!-- Texto -->
+      <div class="flex flex-col justify-center px-8 sm:px-12 lg:px-20 py-28 lg:py-0 order-2 lg:order-1">
+        <p class="font-mono text-[11px] tracking-[0.4em] uppercase text-stone-500 font-bold mb-6">Est. Madrid — Atocha</p>
+        <h1 class="font-cormorant text-7xl sm:text-8xl font-bold text-stone-900 leading-[0.82] mb-1">Aceituna</h1>
+        <h1 class="font-cormorant text-7xl sm:text-8xl italic font-bold text-green-800 leading-[0.82] mb-8">Dulce</h1>
+        <div class="flex items-start gap-4 mb-8">
+          <div class="w-3 h-3 rounded-full bg-green-700 mt-1.5 shrink-0"></div>
+          <p class="text-stone-700 text-base leading-relaxed font-medium">Cafeteria de especialidad. 40+ tostas artesanales sobre pan masa madre, bowls y cafe de origen.</p>
+        </div>
+        <div class="flex items-center gap-4">
+          <a href="#" class="inline-flex items-center gap-2 px-7 py-3.5 bg-stone-900 text-white text-[11px] tracking-[0.15em] uppercase font-bold hover:bg-stone-700 transition">
+            Ver carta
+            <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M17 8l4 4m0 0l-4 4m4-4H3"/></svg>
+          </a>
+          <span class="font-mono text-[11px] text-stone-500 font-bold">L-S 9:00–20:00</span>
+        </div>
+      </div>
+      <!-- Foto -->
+      <div class="relative min-h-[50vh] lg:min-h-screen order-1 lg:order-2">
+        <img src="/images/foto-29.jpeg" alt="Tosta" class="absolute inset-0 w-full h-full object-cover" />
+        <div class="absolute inset-0 bg-gradient-to-l from-transparent to-[#f5f1e8] lg:block hidden"></div>
+        <div class="absolute inset-0 bg-gradient-to-t from-[#f5f1e8] to-transparent lg:hidden"></div>
+        <!-- Floating card -->
+        <div class="absolute bottom-10 left-6 lg:bottom-16 lg:-left-8 bg-white p-4 rounded-xl shadow-2xl w-52 z-10">
+          <img src="/images/foto-20.jpeg" alt="Cafe" class="w-full aspect-square object-cover rounded-lg mb-3" />
+          <p class="font-cormorant text-lg font-bold text-stone-900">Cafe de especialidad</p>
+          <p class="font-mono text-[9px] text-stone-400 font-bold">Single origin & blends</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+
+  <!-- ================================================================ -->
+  <!-- HERO 3: MARQUEE + GALERIA — Bandas de texto + fotos              -->
+  <!-- ================================================================ -->
+  <section id="h3" class="hero-section relative min-h-screen overflow-hidden scroll-mt-14 bg-stone-900">
+    <div class="absolute top-16 left-4 z-50 bg-white text-black text-[10px] font-bold px-3 py-1.5 rounded-full">V3 — Marquee Gallery</div>
+
+    <div class="relative z-10 min-h-screen flex flex-col justify-center">
+      <!-- Marquee superior -->
+      <div class="overflow-hidden py-3 marquee-track">
+        <div class="marquee-content">
+          <span class="font-syne text-[clamp(3rem,8vw,6rem)] font-extrabold text-white/[0.07] uppercase mx-6">ACEITUNA DULCE</span>
+          <span class="font-syne text-[clamp(3rem,8vw,6rem)] font-extrabold text-white/[0.07] uppercase mx-6">ACEITUNA DULCE</span>
+          <span class="font-syne text-[clamp(3rem,8vw,6rem)] font-extrabold text-white/[0.07] uppercase mx-6">ACEITUNA DULCE</span>
+          <span class="font-syne text-[clamp(3rem,8vw,6rem)] font-extrabold text-white/[0.07] uppercase mx-6">ACEITUNA DULCE</span>
+        </div>
+      </div>
+
+      <!-- Centro -->
+      <div class="px-6 sm:px-12 lg:px-20 py-10">
+        <div class="max-w-6xl mx-auto flex flex-col lg:flex-row items-center gap-10 lg:gap-16">
+          <div class="flex gap-4 shrink-0">
+            <div class="w-36 lg:w-48 aspect-[3/4] rounded-2xl overflow-hidden shadow-2xl -rotate-3 hover:rotate-0 transition-transform duration-500">
+              <img src="/images/foto-17.jpeg" alt="Tosta" class="w-full h-full object-cover" />
+            </div>
+            <div class="w-36 lg:w-48 aspect-[3/4] rounded-2xl overflow-hidden shadow-2xl rotate-2 hover:rotate-0 transition-transform duration-500 mt-10">
+              <img src="/images/foto-27.jpeg" alt="Interior" class="w-full h-full object-cover" />
+            </div>
+            <div class="hidden sm:block w-36 lg:w-48 aspect-[3/4] rounded-2xl overflow-hidden shadow-2xl -rotate-1 hover:rotate-0 transition-transform duration-500 mt-4">
+              <img src="/images/foto-20.jpeg" alt="Cafe" class="w-full h-full object-cover" />
+            </div>
+          </div>
+          <div class="text-center lg:text-left">
+            <h1 class="font-instrument text-4xl sm:text-5xl text-white italic mb-4">Cafeteria de especialidad</h1>
+            <p class="font-outfit text-white/60 text-base max-w-sm mx-auto lg:mx-0 mb-8 font-medium">Atocha, Madrid — 40+ tostas artesanales, bowls y cafe de origen unico.</p>
+            <a href="#" class="inline-flex items-center gap-3 px-8 py-4 bg-emerald-500 text-black text-xs tracking-[0.2em] uppercase font-bold rounded-full hover:bg-emerald-400 transition">Explorar la carta</a>
+          </div>
+        </div>
+      </div>
+
+      <!-- Marquee inferior (reverso) -->
+      <div class="overflow-hidden py-3 marquee-track marquee-reverse">
+        <div class="marquee-content">
+          <span class="font-outfit text-sm font-semibold text-white/20 uppercase tracking-[0.3em] mx-8">tostas · bowls · cafe · brunch · masa madre · specialty ·</span>
+          <span class="font-outfit text-sm font-semibold text-white/20 uppercase tracking-[0.3em] mx-8">tostas · bowls · cafe · brunch · masa madre · specialty ·</span>
+          <span class="font-outfit text-sm font-semibold text-white/20 uppercase tracking-[0.3em] mx-8">tostas · bowls · cafe · brunch · masa madre · specialty ·</span>
+          <span class="font-outfit text-sm font-semibold text-white/20 uppercase tracking-[0.3em] mx-8">tostas · bowls · cafe · brunch · masa madre · specialty ·</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+
+  <!-- ================================================================ -->
+  <!-- HERO 4: NOIR LUXURY — Oscuro con acentos dorados                 -->
+  <!-- ================================================================ -->
+  <section id="h4" class="hero-section relative min-h-screen overflow-hidden scroll-mt-14 bg-[#080705]">
+    <div class="absolute top-16 left-4 z-50 bg-amber-400 text-black text-[10px] font-bold px-3 py-1.5 rounded-full">V4 — Noir Luxury</div>
+
+    <div class="absolute inset-0">
+      <img src="/images/foto-17.jpeg" alt="" class="w-full h-full object-cover opacity-10" />
+    </div>
+    <!-- Lineas doradas -->
+    <div class="absolute top-0 left-[20%] w-px h-full bg-gradient-to-b from-transparent via-amber-500/10 to-transparent"></div>
+    <div class="absolute top-0 right-[20%] w-px h-full bg-gradient-to-b from-transparent via-amber-500/10 to-transparent"></div>
+
+    <div class="relative z-10 min-h-screen flex items-center">
+      <div class="w-full max-w-7xl mx-auto px-6 sm:px-12 lg:px-20 grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
+        <div>
+          <div class="flex items-center gap-3 mb-8">
+            <div class="w-12 h-[2px] bg-amber-400"></div>
+            <span class="font-outfit text-amber-400 text-[11px] tracking-[0.4em] uppercase font-bold">Specialty Coffee</span>
+          </div>
+          <h1 class="font-baskerville text-6xl sm:text-7xl lg:text-8xl font-bold text-white leading-[0.85] mb-2">Aceituna</h1>
+          <h1 class="font-baskerville text-6xl sm:text-7xl lg:text-8xl italic text-amber-400 leading-[0.85] mb-8">Dulce</h1>
+          <p class="text-white/60 text-base max-w-md mb-10 font-medium leading-relaxed">Un espacio curado donde cada tosta es una obra de arte sobre pan masa madre. Atocha, Madrid.</p>
+          <div class="flex flex-wrap items-center gap-5">
+            <a href="#" class="group inline-flex items-center gap-3 px-8 py-4 bg-amber-400 text-black text-[11px] tracking-[0.2em] uppercase font-bold hover:bg-amber-300 transition">
+              Ver la carta
+              <svg class="w-4 h-4 group-hover:translate-x-1 transition-transform" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M17 8l4 4m0 0l-4 4m4-4H3"/></svg>
+            </a>
+            <div class="flex items-center gap-2">
+              <div class="w-2.5 h-2.5 rounded-full bg-green-500 animate-pulse"></div>
+              <span class="text-white/50 text-sm font-semibold">Abierto ahora</span>
+            </div>
+          </div>
+        </div>
+        <div class="relative">
+          <div class="aspect-[3/4] rounded-3xl overflow-hidden shadow-2xl ring-1 ring-amber-500/20">
+            <img src="/images/foto-16.jpeg" alt="Tostas" class="w-full h-full object-cover hover:scale-105 transition-transform duration-700" />
+          </div>
+          <div class="absolute -bottom-5 -left-5 bg-amber-400 text-black px-6 py-4 rounded-2xl shadow-xl">
+            <p class="font-baskerville text-3xl font-bold">40+</p>
+            <p class="text-[10px] tracking-wider uppercase font-bold">Tostas artesanales</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+
+  <!-- ================================================================ -->
+  <!-- HERO 5: FOTO FULLSCREEN — Overlay fuerte, texto centrado grande  -->
+  <!-- ================================================================ -->
+  <section id="h5" class="hero-section relative min-h-screen overflow-hidden scroll-mt-14">
+    <div class="absolute top-16 left-4 z-50 bg-white/90 text-black text-[10px] font-bold px-3 py-1.5 rounded-full backdrop-blur">V5 — Fullscreen Photo</div>
+
+    <div class="absolute inset-0">
+      <img src="/images/foto-29.jpeg" alt="" class="w-full h-full object-cover" />
+      <div class="absolute inset-0 bg-black/70"></div>
+    </div>
+
+    <div class="relative z-10 min-h-screen flex flex-col justify-center items-center text-center px-6 py-28">
+      <img src="/images/logo.png" alt="Logo" class="w-16 mb-8 invert brightness-200 drop-shadow-2xl" />
+      <h1 class="font-playfair text-[clamp(4rem,13vw,11rem)] font-black text-white leading-[0.8] mb-2" style="text-shadow: 0 4px 40px rgba(0,0,0,0.5);">ACEITUNA</h1>
+      <h1 class="font-playfair text-[clamp(4rem,13vw,11rem)] font-black italic text-white leading-[0.8] mb-10" style="text-shadow: 0 4px 40px rgba(0,0,0,0.5);">DULCE</h1>
+      <div class="flex items-center gap-5 mb-10">
+        <span class="font-outfit text-white/80 text-base font-medium tracking-widest uppercase">Cafeteria de Especialidad</span>
+        <span class="w-2 h-2 rounded-full bg-emerald-400"></span>
+        <span class="font-outfit text-white/80 text-base font-medium tracking-widest uppercase">Atocha, Madrid</span>
+      </div>
+      <a href="#" class="group inline-flex items-center gap-3 px-10 py-4 bg-white text-black text-xs tracking-[0.2em] uppercase font-bold rounded-full hover:bg-emerald-400 transition shadow-xl">
+        Descubrir la carta
+        <svg class="w-4 h-4 group-hover:translate-x-1 transition-transform" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M17 8l4 4m0 0l-4 4m4-4H3"/></svg>
+      </a>
+    </div>
+  </section>
+
+
+  <!-- ================================================================ -->
+  <!-- HERO 6: GALERIA HORIZONTAL — Cards deslizables                   -->
+  <!-- ================================================================ -->
+  <section id="h6" class="hero-section relative min-h-screen overflow-hidden scroll-mt-14 bg-[#faf7ef]">
+    <div class="absolute top-16 left-4 z-50 bg-black text-white text-[10px] font-bold px-3 py-1.5 rounded-full">V6 — Galeria Horizontal</div>
+
+    <div class="relative z-10 min-h-screen flex flex-col">
+      <div class="px-6 sm:px-12 lg:px-20 pt-28 pb-8">
+        <div class="flex flex-col lg:flex-row lg:items-end lg:justify-between gap-6">
+          <div>
+            <p class="font-outfit text-green-700 text-xs tracking-[0.5em] uppercase font-bold mb-4">Atocha, Madrid</p>
+            <h1 class="font-fraunces text-6xl sm:text-7xl lg:text-8xl font-medium text-stone-900 leading-[0.82]">Aceituna<br/><em class="text-green-800">Dulce</em></h1>
+          </div>
+          <div class="max-w-xs">
+            <p class="text-stone-700 text-base leading-relaxed mb-4 font-medium">Tostas artesanales, bowls y cafe de especialidad junto a la estacion de Atocha.</p>
+            <a href="#" class="inline-flex items-center gap-2 text-stone-900 text-xs tracking-[0.15em] uppercase font-bold border-b-2 border-stone-900 pb-1 hover:border-green-600 transition">
+              Ver carta completa
+              <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M17 8l4 4m0 0l-4 4m4-4H3"/></svg>
+            </a>
+          </div>
+        </div>
+      </div>
+      <div class="flex-1 flex items-center">
+        <div class="w-full overflow-x-auto scrollbar-hide px-6 sm:px-12 lg:px-20 pb-12">
+          <div class="flex gap-5" style="width: max-content;">
+            <div class="group w-64 sm:w-72 shrink-0 cursor-pointer">
+              <div class="aspect-[3/4] rounded-2xl overflow-hidden mb-4 shadow-lg"><img src="/images/foto-16.jpeg" alt="Tostas Saladas" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700" /></div>
+              <p class="font-fraunces text-lg text-stone-900 font-semibold">Tostas Saladas</p>
+              <p class="text-sm text-stone-500 mt-1 font-medium">Pan masa madre con AOVE</p>
+            </div>
+            <div class="group w-64 sm:w-72 shrink-0 cursor-pointer">
+              <div class="aspect-[3/4] rounded-2xl overflow-hidden mb-4 shadow-lg"><img src="/images/foto-1.jpeg" alt="Bowls" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700" /></div>
+              <p class="font-fraunces text-lg text-stone-900 font-semibold">Bowls</p>
+              <p class="text-sm text-stone-500 mt-1 font-medium">Granola, acai y frutas</p>
+            </div>
+            <div class="group w-64 sm:w-72 shrink-0 cursor-pointer">
+              <div class="aspect-[3/4] rounded-2xl overflow-hidden mb-4 shadow-lg"><img src="/images/foto-29.jpeg" alt="Tostas Dulces" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700" /></div>
+              <p class="font-fraunces text-lg text-stone-900 font-semibold">Tostas Dulces</p>
+              <p class="text-sm text-stone-500 mt-1 font-medium">Mascarpone y frutos</p>
+            </div>
+            <div class="group w-64 sm:w-72 shrink-0 cursor-pointer">
+              <div class="aspect-[3/4] rounded-2xl overflow-hidden mb-4 shadow-lg"><img src="/images/foto-20.jpeg" alt="Cafe" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700" /></div>
+              <p class="font-fraunces text-lg text-stone-900 font-semibold">Cafe Specialty</p>
+              <p class="text-sm text-stone-500 mt-1 font-medium">Single origin & blends</p>
+            </div>
+            <div class="group w-64 sm:w-72 shrink-0 cursor-pointer">
+              <div class="aspect-[3/4] rounded-2xl overflow-hidden mb-4 shadow-lg"><img src="/images/foto-27.jpeg" alt="Espacio" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700" /></div>
+              <p class="font-fraunces text-lg text-stone-900 font-semibold">Nuestro Espacio</p>
+              <p class="text-sm text-stone-500 mt-1 font-medium">Calido y acogedor</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+
+  <!-- ================================================================ -->
+  <!-- HERO 7: FULL BLEED + STATS — Inmersivo con datos abajo           -->
+  <!-- ================================================================ -->
+  <section id="h7" class="hero-section relative min-h-screen overflow-hidden scroll-mt-14">
+    <div class="absolute top-16 left-4 z-50 bg-white/90 text-black text-[10px] font-bold px-3 py-1.5 rounded-full backdrop-blur">V7 — Full Bleed + Stats</div>
+
+    <div class="absolute inset-0">
+      <img src="/images/foto-25.jpeg" alt="" class="w-full h-full object-cover" />
+      <div class="absolute inset-0 bg-black/60"></div>
+    </div>
+
+    <div class="relative z-10 min-h-screen flex flex-col justify-between px-6 sm:px-12 lg:px-20 py-28">
+      <div class="flex justify-between items-start">
+        <img src="/images/logo.png" alt="Logo" class="w-12 invert brightness-200 drop-shadow-xl" />
+        <div class="text-right">
+          <p class="font-outfit text-white/70 text-[11px] tracking-[0.3em] uppercase font-bold">Specialty Coffee</p>
+          <p class="font-outfit text-white/70 text-[11px] tracking-[0.3em] uppercase font-bold">& Tostas Artesanales</p>
+        </div>
+      </div>
+      <div class="text-center">
+        <h1 class="font-instrument text-[clamp(4rem,12vw,10rem)] text-white leading-[0.82]" style="text-shadow: 0 4px 40px rgba(0,0,0,0.5);">Aceituna</h1>
+        <h1 class="font-instrument text-[clamp(4rem,12vw,10rem)] italic text-white leading-[0.82]" style="text-shadow: 0 4px 40px rgba(0,0,0,0.5);">Dulce</h1>
+      </div>
+      <div class="flex flex-col sm:flex-row justify-between items-center gap-6">
+        <div class="flex items-center gap-5">
+          <a href="#" class="group inline-flex items-center gap-3 px-8 py-4 bg-white text-black text-[11px] tracking-[0.15em] uppercase font-bold rounded-full hover:bg-emerald-400 transition shadow-lg">
+            Descubrir la carta
+            <svg class="w-4 h-4 group-hover:translate-x-1 transition-transform" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M17 8l4 4m0 0l-4 4m4-4H3"/></svg>
+          </a>
+          <a href="#" class="text-white text-[11px] tracking-[0.15em] uppercase font-bold hover:text-emerald-300 transition" style="text-shadow: 0 1px 6px rgba(0,0,0,0.6);">Como llegar</a>
+        </div>
+        <div class="flex items-center gap-8">
+          <div class="text-center">
+            <p class="font-instrument text-4xl text-white font-bold" style="text-shadow: 0 2px 10px rgba(0,0,0,0.4);">40<span class="text-emerald-400">+</span></p>
+            <p class="font-outfit text-[10px] text-white/60 tracking-widest uppercase font-bold">Tostas</p>
+          </div>
+          <div class="w-px h-10 bg-white/25"></div>
+          <div class="text-center">
+            <p class="font-instrument text-4xl text-white font-bold" style="text-shadow: 0 2px 10px rgba(0,0,0,0.4);">9<span class="text-emerald-400">h</span></p>
+            <p class="font-outfit text-[10px] text-white/60 tracking-widest uppercase font-bold">a 20h</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+
+  <!-- ================================================================ -->
+  <!-- HERO 8: COLLAGE — Fotos rotadas + texto lateral                  -->
+  <!-- ================================================================ -->
+  <section id="h8" class="hero-section relative min-h-screen overflow-hidden scroll-mt-14 bg-[#faf7f0]">
+    <div class="absolute top-16 left-4 z-50 bg-black text-white text-[10px] font-bold px-3 py-1.5 rounded-full">V8 — Collage Organico</div>
+
+    <div class="relative z-10 min-h-screen flex items-center px-6 sm:px-12 lg:px-20 py-28">
+      <div class="w-full max-w-7xl mx-auto grid grid-cols-1 lg:grid-cols-12 gap-10 items-center">
+        <div class="lg:col-span-5 order-2 lg:order-1">
+          <div class="flex items-center gap-3 mb-6">
+            <img src="/images/logo.png" alt="Logo" class="w-10" />
+            <div class="h-px flex-1 bg-stone-300"></div>
+          </div>
+          <h1 class="font-cormorant text-6xl sm:text-7xl font-bold text-stone-900 leading-[0.85]">Aceituna</h1>
+          <h1 class="font-cormorant text-6xl sm:text-7xl italic font-bold text-green-800 leading-[0.85] mb-6">Dulce</h1>
+          <p class="text-stone-700 text-base leading-relaxed mb-5 font-medium">Cafeteria de especialidad junto a Atocha. Cada tosta es una combinacion unica sobre pan masa madre artesanal.</p>
+          <div class="flex flex-wrap gap-2 mb-8">
+            <span class="px-4 py-2 bg-green-100 text-green-900 text-[11px] tracking-wider uppercase rounded-full font-bold">Tostas</span>
+            <span class="px-4 py-2 bg-green-100 text-green-900 text-[11px] tracking-wider uppercase rounded-full font-bold">Bowls</span>
+            <span class="px-4 py-2 bg-green-100 text-green-900 text-[11px] tracking-wider uppercase rounded-full font-bold">Cafe</span>
+            <span class="px-4 py-2 bg-green-100 text-green-900 text-[11px] tracking-wider uppercase rounded-full font-bold">Brunch</span>
+          </div>
+          <a href="#" class="group inline-flex items-center gap-3 px-8 py-4 bg-stone-900 text-white text-[11px] tracking-[0.15em] uppercase font-bold rounded-full hover:bg-green-800 transition">
+            Explorar la carta
+            <svg class="w-4 h-4 group-hover:translate-x-1 transition-transform" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M17 8l4 4m0 0l-4 4m4-4H3"/></svg>
+          </a>
+        </div>
+        <div class="lg:col-span-7 order-1 lg:order-2 relative min-h-[400px] lg:min-h-[550px]">
+          <div class="absolute top-[5%] left-[5%] w-[45%] aspect-[4/5] rounded-3xl overflow-hidden shadow-2xl -rotate-6 hover:rotate-0 transition-transform duration-700 z-10"><img src="/images/foto-16.jpeg" alt="Tostas" class="w-full h-full object-cover" /></div>
+          <div class="absolute top-[10%] right-[5%] w-[40%] aspect-[4/5] rounded-3xl overflow-hidden shadow-2xl rotate-3 hover:rotate-0 transition-transform duration-700 z-20"><img src="/images/foto-29.jpeg" alt="Caprese" class="w-full h-full object-cover" /></div>
+          <div class="absolute bottom-[5%] left-[22%] w-[35%] aspect-[4/5] rounded-3xl overflow-hidden shadow-2xl rotate-6 hover:rotate-0 transition-transform duration-700 z-30"><img src="/images/foto-1.jpeg" alt="Bowl" class="w-full h-full object-cover" /></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+
+  <!-- ================================================================ -->
+  <!-- HERO 9: BRUTALIST — Raw, bold, sin rodeos                        -->
+  <!-- ================================================================ -->
+  <section id="h9" class="hero-section relative min-h-screen overflow-hidden scroll-mt-14 bg-[#f0ece2]">
+    <div class="absolute top-16 left-4 z-50 bg-black text-white text-[10px] font-bold px-3 py-1.5 rounded-full">V9 — Brutalist</div>
+
+    <div class="relative z-10 min-h-screen flex flex-col justify-between px-6 sm:px-10 py-28">
+      <!-- Top -->
+      <div class="flex justify-between items-start border-b-[3px] border-black pb-4">
+        <div>
+          <p class="font-mono text-[12px] tracking-wider text-black font-bold">ACEITUNA DULCE</p>
+          <p class="font-mono text-[11px] tracking-wider text-stone-500 font-bold">SPECIALTY COFFEE & TOSTAS</p>
+        </div>
+        <p class="font-mono text-[12px] tracking-wider text-black font-bold">MADRID — ATOCHA</p>
+      </div>
+      <!-- Main -->
+      <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center">
+        <div class="lg:col-span-7">
+          <h1 class="font-syne text-[clamp(3rem,8vw,7rem)] font-extrabold text-black leading-[0.82] uppercase">Aceituna<br/>Dulce</h1>
+          <div class="flex items-center gap-3 mt-6 flex-wrap">
+            <span class="px-5 py-2.5 bg-black text-white font-mono text-[12px] font-bold">40+ TOSTAS</span>
+            <span class="px-5 py-2.5 bg-green-700 text-white font-mono text-[12px] font-bold">MASA MADRE</span>
+            <span class="px-5 py-2.5 border-[3px] border-black font-mono text-[12px] font-bold text-black">CAFE ORIGEN</span>
+          </div>
+        </div>
+        <div class="lg:col-span-5">
+          <div class="aspect-square max-w-sm border-4 border-black shadow-[8px_8px_0_0_#000] overflow-hidden">
+            <img src="/images/foto-16.jpeg" alt="Tostas" class="w-full h-full object-cover grayscale hover:grayscale-0 transition duration-500" />
+          </div>
+        </div>
+      </div>
+      <!-- Bottom -->
+      <div class="flex flex-col sm:flex-row justify-between items-center gap-4 border-t-[3px] border-black pt-4">
+        <a href="#" class="group inline-flex items-center gap-2 bg-black text-white px-8 py-4 font-mono text-[12px] tracking-[0.15em] uppercase font-bold hover:bg-green-700 transition">
+          Ver carta
+          <svg class="w-4 h-4 group-hover:translate-x-1 transition-transform" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M17 8l4 4m0 0l-4 4m4-4H3"/></svg>
+        </a>
+        <p class="font-mono text-[11px] text-stone-600 font-bold">C/ TORTOSA 4, 28045 MADRID</p>
+      </div>
+    </div>
+  </section>
+
+
+  <!-- ================================================================ -->
+  <!-- HERO 10: DIAGONAL SPLIT — Corte angular                          -->
+  <!-- ================================================================ -->
+  <section id="h10" class="hero-section relative min-h-screen overflow-hidden scroll-mt-14 bg-[#0f1a08]">
+    <div class="absolute top-16 left-4 z-50 bg-white text-black text-[10px] font-bold px-3 py-1.5 rounded-full">V10 — Split Diagonal</div>
+
+    <div class="absolute inset-0">
+      <div class="absolute inset-0" style="clip-path: polygon(55% 0, 100% 0, 100% 100%, 35% 100%);">
+        <img src="/images/foto-17.jpeg" alt="" class="w-full h-full object-cover" />
+        <div class="absolute inset-0 bg-black/30"></div>
+      </div>
+      <div class="absolute inset-0" style="clip-path: polygon(0 0, 58% 0, 38% 100%, 0 100%); background: linear-gradient(160deg, #1a2e10 0%, #0f1a08 100%);"></div>
+    </div>
+
+    <div class="relative z-20 min-h-screen flex items-center px-6 sm:px-12 lg:px-20 py-28">
+      <div class="max-w-xl">
+        <div class="flex items-center gap-3 mb-8">
+          <img src="/images/logo.png" alt="Logo" class="w-10 invert brightness-200" />
+          <div class="h-[2px] w-12 bg-emerald-400"></div>
+          <span class="font-outfit text-emerald-400 text-[11px] tracking-[0.4em] uppercase font-bold">Atocha, Madrid</span>
+        </div>
+        <h1 class="font-playfair text-6xl sm:text-7xl lg:text-8xl font-bold text-white leading-[0.85] mb-2">Aceituna</h1>
+        <h1 class="font-playfair text-6xl sm:text-7xl lg:text-8xl italic font-medium text-emerald-300 leading-[0.85] mb-8">Dulce</h1>
+        <p class="font-outfit text-white/70 text-base leading-relaxed max-w-md mb-10 font-medium">Cafeteria de especialidad. 40+ tostas sobre pan masa madre, bowls, acai y cafe de origen unico.</p>
+        <div class="flex flex-wrap gap-4">
+          <a href="#" class="group inline-flex items-center gap-3 px-8 py-4 bg-emerald-500 text-black text-[11px] tracking-[0.15em] uppercase font-bold rounded-full hover:bg-emerald-400 transition">
+            Ver la carta
+            <svg class="w-4 h-4 group-hover:translate-x-1 transition-transform" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M17 8l4 4m0 0l-4 4m4-4H3"/></svg>
+          </a>
+          <a href="#" class="inline-flex items-center gap-2 px-8 py-4 border-2 border-white/40 text-white text-[11px] tracking-[0.15em] uppercase font-bold rounded-full hover:bg-white/10 transition">
+            <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"/><path stroke-linecap="round" stroke-linejoin="round" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"/></svg>
+            Como llegar
+          </a>
+        </div>
+        <div class="flex items-center gap-8 mt-12 pt-8 border-t border-white/20">
+          <div>
+            <p class="font-playfair text-3xl text-white font-bold">40+</p>
+            <p class="font-outfit text-[10px] text-white/50 tracking-widest uppercase font-bold mt-1">Tostas</p>
+          </div>
+          <div class="w-px h-10 bg-white/20"></div>
+          <div>
+            <p class="font-playfair text-3xl text-white font-bold">100%</p>
+            <p class="font-outfit text-[10px] text-white/50 tracking-widest uppercase font-bold mt-1">Masa madre</p>
+          </div>
+          <div class="w-px h-10 bg-white/20"></div>
+          <div>
+            <p class="font-playfair text-3xl text-white font-bold">7</p>
+            <p class="font-outfit text-[10px] text-white/50 tracking-widest uppercase font-bold mt-1">Dias/semana</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+
+  <!-- ===== FOOTER SELECTOR ===== -->
+  <div class="bg-black border-t border-white/10">
+    <div class="max-w-5xl mx-auto px-6 py-20 text-center">
+      <p class="font-instrument text-3xl text-white mb-3">Elige tu favorito</p>
+      <p class="font-outfit text-white/50 text-sm mb-10">Dime el numero y lo aplico como hero de la web</p>
+      <div class="flex justify-center gap-3 flex-wrap">
+        <a href="#h1" class="bg-white/10 hover:bg-white/20 text-white px-5 py-2.5 rounded-full text-xs transition border border-white/10"><b>V1</b> Cinematico</a>
+        <a href="#h2" class="bg-white/10 hover:bg-white/20 text-white px-5 py-2.5 rounded-full text-xs transition border border-white/10"><b>V2</b> Editorial</a>
+        <a href="#h3" class="bg-white/10 hover:bg-white/20 text-white px-5 py-2.5 rounded-full text-xs transition border border-white/10"><b>V3</b> Marquee</a>
+        <a href="#h4" class="bg-white/10 hover:bg-white/20 text-white px-5 py-2.5 rounded-full text-xs transition border border-white/10"><b>V4</b> Noir Luxury</a>
+        <a href="#h5" class="bg-white/10 hover:bg-white/20 text-white px-5 py-2.5 rounded-full text-xs transition border border-white/10"><b>V5</b> Fullscreen</a>
+        <a href="#h6" class="bg-white/10 hover:bg-white/20 text-white px-5 py-2.5 rounded-full text-xs transition border border-white/10"><b>V6</b> Galeria</a>
+        <a href="#h7" class="bg-white/10 hover:bg-white/20 text-white px-5 py-2.5 rounded-full text-xs transition border border-white/10"><b>V7</b> Full Bleed</a>
+        <a href="#h8" class="bg-white/10 hover:bg-white/20 text-white px-5 py-2.5 rounded-full text-xs transition border border-white/10"><b>V8</b> Collage</a>
+        <a href="#h9" class="bg-white/10 hover:bg-white/20 text-white px-5 py-2.5 rounded-full text-xs transition border border-white/10"><b>V9</b> Brutalist</a>
+        <a href="#h10" class="bg-white/10 hover:bg-white/20 text-white px-5 py-2.5 rounded-full text-xs transition border border-white/10"><b>V10</b> Diagonal</a>
+      </div>
+    </div>
+  </div>
+
+
+  <!-- ===== NAV HIGHLIGHT SCRIPT ===== -->
+  <script>
+    const sections = document.querySelectorAll('.hero-section');
+    const btns = document.querySelectorAll('.hero-nav-btn');
+    const obs = new IntersectionObserver(entries => {
+      entries.forEach(e => {
+        if (e.isIntersecting) {
+          const id = e.target.id.replace('h','');
+          btns.forEach(b => b.classList.toggle('active', b.dataset.hero === id));
+        }
+      });
+    }, { threshold: 0.3 });
+    sections.forEach(s => obs.observe(s));
+  </script>
+
+</body>
+</html>

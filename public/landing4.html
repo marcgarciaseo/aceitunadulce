@@ -1,0 +1,655 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Aceituna Dulce - Specialty Coffee & Tostas Artesanales</title>
+  <link rel="icon" href="/images/logo.png" type="image/png">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;0,9..40,600;0,9..40,700;1,9..40,400;1,9..40,500&family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,400;0,9..144,500;0,9..144,600;0,9..144,700;0,9..144,800;0,9..144,900;1,9..144,400;1,9..144,500;1,9..144,600;1,9..144,700&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            cream: '#fefdf8',
+            'cream-warm': '#fdf9ec',
+            olive: {
+              50: '#f6f7f0',
+              100: '#e8ebd8',
+              200: '#d4d9b8',
+              300: '#b8c08e',
+              400: '#9aa868',
+              500: '#7b8e42',
+              600: '#607131',
+              700: '#4a5729',
+              800: '#3d4723',
+              900: '#2e351b',
+            }
+          },
+          fontFamily: {
+            fraunces: ['Fraunces', 'serif'],
+            sans: ['DM Sans', 'sans-serif'],
+            mono: ['Space Mono', 'monospace'],
+          }
+        }
+      }
+    }
+  </script>
+  <style>
+    html { scroll-behavior: smooth; }
+    body { font-family: 'DM Sans', sans-serif; background-color: #fefdf8; color: #292524; }
+
+    /* Floating animation for polaroid cards */
+    @keyframes floatA {
+      0%, 100% { transform: rotate(-6deg) translateY(0); }
+      50% { transform: rotate(-6deg) translateY(-14px); }
+    }
+    @keyframes floatB {
+      0%, 100% { transform: rotate(2deg) translateY(0); }
+      50% { transform: rotate(2deg) translateY(-10px); }
+    }
+    @keyframes floatC {
+      0%, 100% { transform: rotate(-3deg) translateY(0); }
+      50% { transform: rotate(-3deg) translateY(-12px); }
+    }
+    .card-float-a { animation: floatA 5s ease-in-out infinite; }
+    .card-float-b { animation: floatB 6s ease-in-out infinite 0.8s; }
+    .card-float-c { animation: floatC 5.5s ease-in-out infinite 1.6s; }
+
+    /* Cascade entrance */
+    @keyframes cascadeIn {
+      0% { opacity: 0; transform: translateX(120px) translateY(-40px) scale(0.8); }
+      100% { opacity: 1; transform: translateX(0) translateY(0) scale(1); }
+    }
+    .cascade-1 { animation: cascadeIn 0.9s cubic-bezier(0.22,1,0.36,1) 0.3s both; }
+    .cascade-2 { animation: cascadeIn 0.9s cubic-bezier(0.22,1,0.36,1) 0.55s both; }
+    .cascade-3 { animation: cascadeIn 0.9s cubic-bezier(0.22,1,0.36,1) 0.8s both; }
+
+    /* Hero title entrance */
+    @keyframes fadeUp {
+      0% { opacity: 0; transform: translateY(30px); }
+      100% { opacity: 1; transform: translateY(0); }
+    }
+    .hero-title-anim { animation: fadeUp 1s cubic-bezier(0.22,1,0.36,1) 0.1s both; }
+    .hero-sub-anim { animation: fadeUp 1s cubic-bezier(0.22,1,0.36,1) 0.4s both; }
+    .hero-btn-anim { animation: fadeUp 1s cubic-bezier(0.22,1,0.36,1) 0.6s both; }
+
+    /* Marquee */
+    @keyframes marquee {
+      0% { transform: translateX(0); }
+      100% { transform: translateX(-50%); }
+    }
+    .marquee-track { animation: marquee 25s linear infinite; }
+
+    /* Scroll reveal */
+    .reveal {
+      opacity: 0; transform: translateY(40px);
+      transition: opacity 0.8s cubic-bezier(0.22,1,0.36,1), transform 0.8s cubic-bezier(0.22,1,0.36,1);
+    }
+    .reveal.visible { opacity: 1; transform: translateY(0); }
+
+    /* Parallax section */
+    .parallax-section {
+      background-attachment: fixed;
+      background-position: center;
+      background-size: cover;
+    }
+    @media (max-width: 768px) {
+      .parallax-section { background-attachment: scroll; }
+    }
+
+    /* Masonry */
+    .masonry { columns: 3; column-gap: 16px; }
+    @media (max-width: 1024px) { .masonry { columns: 2; } }
+    @media (max-width: 640px) { .masonry { columns: 1; } }
+    .masonry-item { break-inside: avoid; margin-bottom: 16px; }
+
+    /* Lightbox */
+    .lightbox-overlay {
+      position: fixed; inset: 0; background: rgba(0,0,0,0.92);
+      z-index: 9999; display: none; align-items: center; justify-content: center;
+      cursor: zoom-out;
+    }
+    .lightbox-overlay.active { display: flex; }
+    .lightbox-overlay img {
+      max-width: 90vw; max-height: 88vh; border-radius: 12px;
+      object-fit: contain; cursor: default;
+    }
+    .lightbox-btn {
+      position: absolute; top: 50%; transform: translateY(-50%);
+      background: rgba(255,255,255,0.15); border: none; color: white;
+      width: 48px; height: 48px; border-radius: 50%; font-size: 1.5rem;
+      cursor: pointer; display: flex; align-items: center; justify-content: center;
+      transition: background 0.2s;
+    }
+    .lightbox-btn:hover { background: rgba(255,255,255,0.3); }
+    .lightbox-prev { left: 20px; }
+    .lightbox-next { right: 20px; }
+    .lightbox-close {
+      position: absolute; top: 20px; right: 20px;
+      background: rgba(255,255,255,0.15); border: none; color: white;
+      width: 44px; height: 44px; border-radius: 50%; font-size: 1.4rem;
+      cursor: pointer; display: flex; align-items: center; justify-content: center;
+      transition: background 0.2s;
+    }
+    .lightbox-close:hover { background: rgba(255,255,255,0.3); }
+
+    /* Nav */
+    .nav-scrolled { background: rgba(246,247,240,0.92) !important; backdrop-filter: blur(12px); box-shadow: 0 1px 8px rgba(0,0,0,0.06); }
+
+    /* Decorative leaf SVG */
+    .leaf-deco { opacity: 0.25; }
+
+    /* Menu card hover */
+    .menu-item { transition: background 0.2s, transform 0.2s; }
+    .menu-item:hover { background: #f6f7f0; transform: translateY(-1px); }
+
+    /* Photo card polaroid style */
+    .polaroid {
+      background: white;
+      padding: 8px 8px 28px 8px;
+      box-shadow: 0 8px 30px rgba(0,0,0,0.12), 0 2px 8px rgba(0,0,0,0.06);
+      border-radius: 4px;
+    }
+    .polaroid img { border-radius: 2px; }
+
+    /* Hamburger */
+    .hamburger span {
+      display: block; width: 24px; height: 2px; background: #4a5729;
+      transition: all 0.3s; border-radius: 2px;
+    }
+    .hamburger.active span:nth-child(1) { transform: rotate(45deg) translate(5px,5px); }
+    .hamburger.active span:nth-child(2) { opacity: 0; }
+    .hamburger.active span:nth-child(3) { transform: rotate(-45deg) translate(5px,-5px); }
+
+    /* Mobile menu */
+    .mobile-menu {
+      transform: translateX(100%); transition: transform 0.35s cubic-bezier(0.22,1,0.36,1);
+    }
+    .mobile-menu.open { transform: translateX(0); }
+  </style>
+</head>
+<body class="antialiased">
+
+  <!-- ======================== NAV ======================== -->
+  <nav id="mainNav" class="fixed top-0 left-0 right-0 z-50 transition-all duration-300" style="background:transparent;">
+    <div class="max-w-7xl mx-auto px-6 py-4 flex items-center justify-between">
+      <a href="#hero" class="flex items-center gap-3">
+        <img src="/images/logo.png" alt="Logo" class="w-10 h-10 rounded-full">
+        <span class="font-fraunces font-semibold text-olive-800 text-lg hidden sm:inline">Aceituna Dulce</span>
+      </a>
+      <div class="hidden md:flex items-center gap-8">
+        <a href="#nosotros" class="font-mono text-xs uppercase tracking-wider text-olive-700 hover:text-olive-500 transition-colors">Nosotros</a>
+        <a href="#carta" class="font-mono text-xs uppercase tracking-wider text-olive-700 hover:text-olive-500 transition-colors">Carta</a>
+        <a href="#galeria" class="font-mono text-xs uppercase tracking-wider text-olive-700 hover:text-olive-500 transition-colors">Galeria</a>
+        <a href="#contacto" class="font-mono text-xs uppercase tracking-wider text-olive-700 hover:text-olive-500 transition-colors">Contacto</a>
+        <a href="https://www.instagram.com/aceitunadulce" target="_blank" class="text-olive-600 hover:text-olive-500 transition-colors">
+          <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zM12 0C8.741 0 8.333.014 7.053.072 2.695.272.273 2.69.073 7.052.014 8.333 0 8.741 0 12c0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98C8.333 23.986 8.741 24 12 24c3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98C15.668.014 15.259 0 12 0zm0 5.838a6.162 6.162 0 100 12.324 6.162 6.162 0 000-12.324zM12 16a4 4 0 110-8 4 4 0 010 8zm6.406-11.845a1.44 1.44 0 100 2.881 1.44 1.44 0 000-2.881z"/></svg>
+        </a>
+      </div>
+      <!-- Hamburger -->
+      <button id="hamburgerBtn" class="hamburger md:hidden flex flex-col gap-1.5 p-2" aria-label="Menu">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+    <!-- Mobile menu -->
+    <div id="mobileMenu" class="mobile-menu fixed top-0 right-0 w-72 h-screen bg-olive-50 shadow-xl md:hidden flex flex-col pt-20 px-8 gap-6">
+      <a href="#nosotros" class="mobile-link font-mono text-sm uppercase tracking-wider text-olive-700 py-2">Nosotros</a>
+      <a href="#carta" class="mobile-link font-mono text-sm uppercase tracking-wider text-olive-700 py-2">Carta</a>
+      <a href="#galeria" class="mobile-link font-mono text-sm uppercase tracking-wider text-olive-700 py-2">Galeria</a>
+      <a href="#contacto" class="mobile-link font-mono text-sm uppercase tracking-wider text-olive-700 py-2">Contacto</a>
+      <a href="https://www.instagram.com/aceitunadulce" target="_blank" class="font-mono text-sm text-olive-600 py-2">@aceitunadulce</a>
+    </div>
+  </nav>
+
+  <!-- ======================== HERO ======================== -->
+  <section id="hero" class="min-h-screen flex items-center relative overflow-hidden" style="background:#fefdf8;">
+    <!-- Decorative leaf SVG -->
+    <svg class="leaf-deco absolute top-24 left-[28%] w-48 h-48 pointer-events-none hidden lg:block" viewBox="0 0 200 200" fill="none">
+      <path d="M40 160 C60 100, 100 60, 160 40 C140 80, 120 120, 100 140 C80 155, 55 160, 40 160Z" stroke="#b8c08e" stroke-width="1.5" fill="none"/>
+      <path d="M90 130 C95 100, 110 75, 140 50" stroke="#b8c08e" stroke-width="1" fill="none"/>
+    </svg>
+    <svg class="leaf-deco absolute bottom-20 left-16 w-32 h-32 pointer-events-none hidden lg:block" viewBox="0 0 200 200" fill="none">
+      <ellipse cx="100" cy="100" rx="60" ry="30" stroke="#b8c08e" stroke-width="1.2" fill="none" transform="rotate(-30 100 100)"/>
+      <line x1="60" y1="120" x2="140" y2="80" stroke="#b8c08e" stroke-width="1" />
+    </svg>
+    <!-- Thin decorative curved line near the title -->
+    <svg class="absolute top-[38%] left-[42%] w-64 h-24 pointer-events-none hidden lg:block" viewBox="0 0 256 96" fill="none" style="opacity:0.3;">
+      <path d="M0 80 C60 0, 190 0, 256 60" stroke="#b8c08e" stroke-width="2" fill="none"/>
+    </svg>
+
+    <div class="max-w-7xl mx-auto px-6 w-full grid lg:grid-cols-2 gap-12 items-center py-24 lg:py-0">
+      <!-- Left: Title -->
+      <div class="z-10 pt-16 lg:pt-0">
+        <div class="hero-title-anim">
+          <h1 class="font-fraunces font-800 leading-[0.92] tracking-tight" style="font-size:clamp(3.5rem,8vw,8rem);color:#3d4723;">
+            Aceituna<br><span style="color:#7b8e42;">Dulce</span>
+          </h1>
+        </div>
+        <p class="hero-sub-anim font-mono text-sm md:text-base mt-6 tracking-wide" style="color:#607131;">
+          Specialty Coffee & Tostas Artesanales &middot; Madrid
+        </p>
+        <div class="hero-btn-anim flex flex-wrap gap-4 mt-8">
+          <a href="#carta" class="inline-block px-8 py-3 rounded-full font-semibold text-sm transition-all duration-300" style="background:#7b8e42;color:#fefdf8;" onmouseover="this.style.background='#607131'" onmouseout="this.style.background='#7b8e42'">
+            Ver Carta
+          </a>
+          <a href="#contacto" class="inline-block px-8 py-3 rounded-full font-semibold text-sm border-2 transition-all duration-300" style="border-color:#7b8e42;color:#607131;" onmouseover="this.style.background='#7b8e42';this.style.color='#fefdf8'" onmouseout="this.style.background='transparent';this.style.color='#607131'">
+            Visitanos
+          </a>
+        </div>
+      </div>
+
+      <!-- Right: Overlapping polaroid cards -->
+      <div class="relative h-[420px] sm:h-[500px] lg:h-[560px] flex items-center justify-center">
+        <!-- Card behind left -->
+        <div class="cascade-1 card-float-a polaroid absolute w-48 sm:w-56 lg:w-64 z-10" style="top:12%;left:2%;transform:rotate(-6deg);">
+          <img src="/images/foto-29.jpeg" alt="Aceituna Dulce" class="w-full h-48 sm:h-56 lg:h-64 object-cover">
+        </div>
+        <!-- Card behind right -->
+        <div class="cascade-2 card-float-c polaroid absolute w-44 sm:w-52 lg:w-60 z-10" style="bottom:6%;right:2%;transform:rotate(-3deg);">
+          <img src="/images/foto-1.jpeg" alt="Aceituna Dulce" class="w-full h-44 sm:h-52 lg:h-56 object-cover">
+        </div>
+        <!-- Card front (largest) -->
+        <div class="cascade-3 card-float-b polaroid absolute w-56 sm:w-64 lg:w-72 z-20" style="top:18%;left:22%;transform:rotate(2deg);">
+          <img src="/images/foto-16.jpeg" alt="Aceituna Dulce" class="w-full h-56 sm:h-64 lg:h-72 object-cover">
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ======================== MARQUEE ======================== -->
+  <div class="overflow-hidden py-4" style="background:#e8ebd8;">
+    <div class="flex whitespace-nowrap marquee-track">
+      <span class="font-mono text-sm md:text-base font-bold tracking-widest px-4" style="color:#607131;">
+        40+ TOSTAS ARTESANALES &bull; SPECIALTY COFFEE &bull; 100% MASA MADRE &bull; BOWLS & ACAI &bull; ATOCHA MADRID &bull;&nbsp;
+        40+ TOSTAS ARTESANALES &bull; SPECIALTY COFFEE &bull; 100% MASA MADRE &bull; BOWLS & ACAI &bull; ATOCHA MADRID &bull;&nbsp;
+        40+ TOSTAS ARTESANALES &bull; SPECIALTY COFFEE &bull; 100% MASA MADRE &bull; BOWLS & ACAI &bull; ATOCHA MADRID &bull;&nbsp;
+        40+ TOSTAS ARTESANALES &bull; SPECIALTY COFFEE &bull; 100% MASA MADRE &bull; BOWLS & ACAI &bull; ATOCHA MADRID &bull;&nbsp;
+      </span>
+      <span class="font-mono text-sm md:text-base font-bold tracking-widest px-4" style="color:#607131;">
+        40+ TOSTAS ARTESANALES &bull; SPECIALTY COFFEE &bull; 100% MASA MADRE &bull; BOWLS & ACAI &bull; ATOCHA MADRID &bull;&nbsp;
+        40+ TOSTAS ARTESANALES &bull; SPECIALTY COFFEE &bull; 100% MASA MADRE &bull; BOWLS & ACAI &bull; ATOCHA MADRID &bull;&nbsp;
+        40+ TOSTAS ARTESANALES &bull; SPECIALTY COFFEE &bull; 100% MASA MADRE &bull; BOWLS & ACAI &bull; ATOCHA MADRID &bull;&nbsp;
+        40+ TOSTAS ARTESANALES &bull; SPECIALTY COFFEE &bull; 100% MASA MADRE &bull; BOWLS & ACAI &bull; ATOCHA MADRID &bull;&nbsp;
+      </span>
+    </div>
+  </div>
+
+  <!-- ======================== NOSOTROS ======================== -->
+  <section id="nosotros" class="py-24 lg:py-32" style="background:#fefdf8;">
+    <div class="max-w-7xl mx-auto px-6">
+      <div class="grid lg:grid-cols-2 gap-16 items-center">
+        <!-- Text side -->
+        <div class="reveal">
+          <span class="font-mono text-xs uppercase tracking-[0.25em] mb-4 inline-block" style="color:#7b8e42;">Nuestra historia</span>
+          <h2 class="font-fraunces text-4xl md:text-5xl font-bold mb-6" style="color:#3d4723;">
+            Donde el cafe de especialidad se encuentra con el pan de masa madre
+          </h2>
+          <p class="text-lg leading-relaxed mb-6" style="color:#57534e;">
+            En el corazon de Madrid, junto a la estacion de Atocha, Aceituna Dulce nacio con una idea sencilla: ofrecer tostas artesanales sobre pan de masa madre autentico, acompanadas de cafe de especialidad cuidadosamente seleccionado. Cada manana preparamos nuestras mas de 40 variedades de tostas con ingredientes frescos y de temporada.
+          </p>
+          <p class="text-lg leading-relaxed" style="color:#57534e;">
+            Nuestro espacio esta pensado para que disfrutes de cada bocado, ya sea un desayuno tranquilo, un brunch con amigos o una merienda con tu bowl de acai favorito. Te esperamos con WiFi gratuito y la mejor atencion.
+          </p>
+          <!-- Stats -->
+          <div class="grid grid-cols-3 gap-6 mt-10 pt-10 border-t" style="border-color:#e8ebd8;">
+            <div>
+              <div class="font-fraunces text-4xl md:text-5xl font-bold" style="color:#7b8e42;">40+</div>
+              <div class="font-mono text-xs uppercase tracking-wide mt-1" style="color:#78716c;">Tostas</div>
+            </div>
+            <div>
+              <div class="font-fraunces text-4xl md:text-5xl font-bold" style="color:#7b8e42;">100%</div>
+              <div class="font-mono text-xs uppercase tracking-wide mt-1" style="color:#78716c;">Masa Madre</div>
+            </div>
+            <div>
+              <div class="font-fraunces text-4xl md:text-5xl font-bold" style="color:#7b8e42;">5<span class="text-3xl">&#9733;</span></div>
+              <div class="font-mono text-xs uppercase tracking-wide mt-1" style="color:#78716c;">Valoracion</div>
+            </div>
+          </div>
+        </div>
+        <!-- Photo grid offset -->
+        <div class="reveal grid grid-cols-2 gap-4" style="--delay:0.15s;">
+          <div class="space-y-4">
+            <div class="rounded-2xl overflow-hidden shadow-lg">
+              <img src="/images/foto-18.jpeg" alt="Interior" class="w-full h-48 md:h-56 object-cover">
+            </div>
+            <div class="rounded-2xl overflow-hidden shadow-lg mt-8">
+              <img src="/images/foto-13.jpeg" alt="Cafe" class="w-full h-56 md:h-64 object-cover">
+            </div>
+          </div>
+          <div class="space-y-4 pt-8">
+            <div class="rounded-2xl overflow-hidden shadow-lg">
+              <img src="/images/foto-26.jpeg" alt="Tosta" class="w-full h-56 md:h-64 object-cover">
+            </div>
+            <div class="rounded-2xl overflow-hidden shadow-lg">
+              <img src="/images/foto-8.jpeg" alt="Bowl" class="w-full h-48 md:h-56 object-cover">
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ======================== CARTA ======================== -->
+  <section id="carta" class="py-24 lg:py-32" style="background:#fdf9ec;">
+    <div class="max-w-7xl mx-auto px-6">
+      <div class="text-center mb-16 reveal">
+        <span class="font-mono text-xs uppercase tracking-[0.25em] mb-4 inline-block" style="color:#7b8e42;">Nuestra carta</span>
+        <h2 class="font-fraunces text-4xl md:text-5xl font-bold" style="color:#3d4723;">Carta Completa</h2>
+        <p class="mt-4 text-lg max-w-xl mx-auto" style="color:#78716c;">Todas nuestras tostas sobre pan de masa madre artesanal, horneado cada dia.</p>
+      </div>
+
+      <!-- Menu tabs -->
+      <div class="flex flex-wrap justify-center gap-3 mb-12 reveal">
+        <button onclick="showMenuTab('saladas')" id="tab-saladas" class="menu-tab px-6 py-2.5 rounded-full font-mono text-xs uppercase tracking-wider font-bold transition-all" style="background:#7b8e42;color:#fefdf8;">Tostas Saladas</button>
+        <button onclick="showMenuTab('dulces')" id="tab-dulces" class="menu-tab px-6 py-2.5 rounded-full font-mono text-xs uppercase tracking-wider font-bold transition-all border-2" style="border-color:#d4d9b8;color:#607131;background:transparent;">Tostas Dulces</button>
+        <button onclick="showMenuTab('bowls')" id="tab-bowls" class="menu-tab px-6 py-2.5 rounded-full font-mono text-xs uppercase tracking-wider font-bold transition-all border-2" style="border-color:#d4d9b8;color:#607131;background:transparent;">Bowls</button>
+        <button onclick="showMenuTab('otras')" id="tab-otras" class="menu-tab px-6 py-2.5 rounded-full font-mono text-xs uppercase tracking-wider font-bold transition-all border-2" style="border-color:#d4d9b8;color:#607131;background:transparent;">Otras</button>
+      </div>
+
+      <!-- Tostas Saladas -->
+      <div id="menu-saladas" class="menu-panel">
+        <div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-3">
+          <div class="menu-item flex justify-between items-center px-5 py-4 rounded-xl bg-white/60"><span class="font-semibold" style="color:#3d4723;">Tumaca</span><span class="font-mono text-sm font-bold" style="color:#7b8e42;">3.50&euro;</span></div>
+          <div class="menu-item flex justify-between items-center px-5 py-4 rounded-xl bg-white/60"><span class="font-semibold" style="color:#3d4723;">Avocate</span><span class="font-mono text-sm font-bold" style="color:#7b8e42;">7&euro;</span></div>
+          <div class="menu-item flex justify-between items-center px-5 py-4 rounded-xl bg-white/60"><span class="font-semibold" style="color:#3d4723;">Mixta</span><span class="font-mono text-sm font-bold" style="color:#7b8e42;">7&euro;</span></div>
+          <div class="menu-item flex justify-between items-center px-5 py-4 rounded-xl bg-white/60"><span class="font-semibold" style="color:#3d4723;">Vitalica</span><span class="font-mono text-sm font-bold" style="color:#7b8e42;">7&euro;</span></div>
+          <div class="menu-item flex justify-between items-center px-5 py-4 rounded-xl bg-white/60"><span class="font-semibold" style="color:#3d4723;">Alegria</span><span class="font-mono text-sm font-bold" style="color:#7b8e42;">8&euro;</span></div>
+          <div class="menu-item flex justify-between items-center px-5 py-4 rounded-xl bg-white/60"><span class="font-semibold" style="color:#3d4723;">Campestre</span><span class="font-mono text-sm font-bold" style="color:#7b8e42;">8&euro;</span></div>
+          <div class="menu-item flex justify-between items-center px-5 py-4 rounded-xl bg-white/60"><span class="font-semibold" style="color:#3d4723;">Dulcetta</span><span class="font-mono text-sm font-bold" style="color:#7b8e42;">8&euro;</span></div>
+          <div class="menu-item flex justify-between items-center px-5 py-4 rounded-xl bg-white/60"><span class="font-semibold" style="color:#3d4723;">Granjera</span><span class="font-mono text-sm font-bold" style="color:#7b8e42;">8&euro;</span></div>
+          <div class="menu-item flex justify-between items-center px-5 py-4 rounded-xl bg-white/60"><span class="font-semibold" style="color:#3d4723;">Mediterranea</span><span class="font-mono text-sm font-bold" style="color:#7b8e42;">9&euro;</span></div>
+          <div class="menu-item flex justify-between items-center px-5 py-4 rounded-xl bg-white/60"><span class="font-semibold" style="color:#3d4723;">Serranova</span><span class="font-mono text-sm font-bold" style="color:#7b8e42;">8&euro;</span></div>
+          <div class="menu-item flex justify-between items-center px-5 py-4 rounded-xl bg-white/60"><span class="font-semibold" style="color:#3d4723;">Turry</span><span class="font-mono text-sm font-bold" style="color:#7b8e42;">8&euro;</span></div>
+          <div class="menu-item flex justify-between items-center px-5 py-4 rounded-xl bg-white/60"><span class="font-semibold" style="color:#3d4723;">Ahumada</span><span class="font-mono text-sm font-bold" style="color:#7b8e42;">10&euro;</span></div>
+          <div class="menu-item flex justify-between items-center px-5 py-4 rounded-xl bg-white/60"><span class="font-semibold" style="color:#3d4723;">Armonia</span><span class="font-mono text-sm font-bold" style="color:#7b8e42;">10&euro;</span></div>
+          <div class="menu-item flex justify-between items-center px-5 py-4 rounded-xl bg-white/60"><span class="font-semibold" style="color:#3d4723;">Briole</span><span class="font-mono text-sm font-bold" style="color:#7b8e42;">10&euro;</span></div>
+          <div class="menu-item flex justify-between items-center px-5 py-4 rounded-xl bg-white/60"><span class="font-semibold" style="color:#3d4723;">Cantabria</span><span class="font-mono text-sm font-bold" style="color:#7b8e42;">10&euro;</span></div>
+          <div class="menu-item flex justify-between items-center px-5 py-4 rounded-xl bg-white/60"><span class="font-semibold" style="color:#3d4723;">Caprese</span><span class="font-mono text-sm font-bold" style="color:#7b8e42;">10&euro;</span></div>
+          <div class="menu-item flex justify-between items-center px-5 py-4 rounded-xl bg-white/60"><span class="font-semibold" style="color:#3d4723;">Costera</span><span class="font-mono text-sm font-bold" style="color:#7b8e42;">10&euro;</span></div>
+          <div class="menu-item flex justify-between items-center px-5 py-4 rounded-xl bg-white/60"><span class="font-semibold" style="color:#3d4723;">Sabra</span><span class="font-mono text-sm font-bold" style="color:#7b8e42;">10&euro;</span></div>
+          <div class="menu-item flex justify-between items-center px-5 py-4 rounded-xl bg-white/60"><span class="font-semibold" style="color:#3d4723;">Atlantica</span><span class="font-mono text-sm font-bold" style="color:#7b8e42;">12&euro;</span></div>
+          <div class="menu-item flex justify-between items-center px-5 py-4 rounded-xl bg-white/60"><span class="font-semibold" style="color:#3d4723;">Fresatte</span><span class="font-mono text-sm font-bold" style="color:#7b8e42;">12&euro;</span></div>
+          <div class="menu-item flex justify-between items-center px-5 py-4 rounded-xl bg-white/60"><span class="font-semibold" style="color:#3d4723;">Iberica</span><span class="font-mono text-sm font-bold" style="color:#7b8e42;">12&euro;</span></div>
+          <div class="menu-item flex justify-between items-center px-5 py-4 rounded-xl bg-white/60"><span class="font-semibold" style="color:#3d4723;">Marinera</span><span class="font-mono text-sm font-bold" style="color:#7b8e42;">12&euro;</span></div>
+          <div class="menu-item flex justify-between items-center px-5 py-4 rounded-xl bg-white/60"><span class="font-semibold" style="color:#3d4723;">Oceanica</span><span class="font-mono text-sm font-bold" style="color:#7b8e42;">12&euro;</span></div>
+          <div class="menu-item flex justify-between items-center px-5 py-4 rounded-xl bg-white/60"><span class="font-semibold" style="color:#3d4723;">Salmary</span><span class="font-mono text-sm font-bold" style="color:#7b8e42;">12&euro;</span></div>
+          <div class="menu-item flex justify-between items-center px-5 py-4 rounded-xl bg-white/60"><span class="font-semibold" style="color:#3d4723;">Salmore</span><span class="font-mono text-sm font-bold" style="color:#7b8e42;">12&euro;</span></div>
+          <div class="menu-item flex justify-between items-center px-5 py-4 rounded-xl bg-white/60"><span class="font-semibold" style="color:#3d4723;">Serrania</span><span class="font-mono text-sm font-bold" style="color:#7b8e42;">12&euro;</span></div>
+          <div class="menu-item flex justify-between items-center px-5 py-4 rounded-xl bg-white/60"><span class="font-semibold" style="color:#3d4723;">Suprema</span><span class="font-mono text-sm font-bold" style="color:#7b8e42;">12&euro;</span></div>
+          <div class="menu-item flex justify-between items-center px-5 py-4 rounded-xl bg-white/60"><span class="font-semibold" style="color:#3d4723;">Tunali</span><span class="font-mono text-sm font-bold" style="color:#7b8e42;">12&euro;</span></div>
+          <div class="menu-item flex justify-between items-center px-5 py-4 rounded-xl bg-white/60"><span class="font-semibold" style="color:#3d4723;">Vaquera</span><span class="font-mono text-sm font-bold" style="color:#7b8e42;">12&euro;</span></div>
+        </div>
+      </div>
+
+      <!-- Tostas Dulces -->
+      <div id="menu-dulces" class="menu-panel hidden">
+        <div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-3">
+          <div class="menu-item flex justify-between items-center px-5 py-4 rounded-xl bg-white/60"><span class="font-semibold" style="color:#3d4723;">Berry</span><span class="font-mono text-sm font-bold" style="color:#7b8e42;">4&euro;</span></div>
+          <div class="menu-item flex justify-between items-center px-5 py-4 rounded-xl bg-white/60"><span class="font-semibold" style="color:#3d4723;">Exotica</span><span class="font-mono text-sm font-bold" style="color:#7b8e42;">7&euro;</span></div>
+          <div class="menu-item flex justify-between items-center px-5 py-4 rounded-xl bg-white/60"><span class="font-semibold" style="color:#3d4723;">Mielitas</span><span class="font-mono text-sm font-bold" style="color:#7b8e42;">7&euro;</span></div>
+          <div class="menu-item flex justify-between items-center px-5 py-4 rounded-xl bg-white/60"><span class="font-semibold" style="color:#3d4723;">Nutrely</span><span class="font-mono text-sm font-bold" style="color:#7b8e42;">7&euro;</span></div>
+          <div class="menu-item flex justify-between items-center px-5 py-4 rounded-xl bg-white/60"><span class="font-semibold" style="color:#3d4723;">Pasion</span><span class="font-mono text-sm font-bold" style="color:#7b8e42;">7&euro;</span></div>
+          <div class="menu-item flex justify-between items-center px-5 py-4 rounded-xl bg-white/60"><span class="font-semibold" style="color:#3d4723;">Deseo</span><span class="font-mono text-sm font-bold" style="color:#7b8e42;">8&euro;</span></div>
+          <div class="menu-item flex justify-between items-center px-5 py-4 rounded-xl bg-white/60"><span class="font-semibold" style="color:#3d4723;">Fusion</span><span class="font-mono text-sm font-bold" style="color:#7b8e42;">8&euro;</span></div>
+        </div>
+      </div>
+
+      <!-- Bowls -->
+      <div id="menu-bowls" class="menu-panel hidden">
+        <div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-3">
+          <div class="menu-item flex justify-between items-center px-5 py-4 rounded-xl bg-white/60"><span class="font-semibold" style="color:#3d4723;">Frutella</span><span class="font-mono text-sm font-bold" style="color:#7b8e42;">9&euro;</span></div>
+          <div class="menu-item flex justify-between items-center px-5 py-4 rounded-xl bg-white/60"><span class="font-semibold" style="color:#3d4723;">Acai</span><span class="font-mono text-sm font-bold" style="color:#7b8e42;">10&euro;</span></div>
+          <div class="menu-item flex justify-between items-center px-5 py-4 rounded-xl bg-white/60"><span class="font-semibold" style="color:#3d4723;">Caribean</span><span class="font-mono text-sm font-bold" style="color:#7b8e42;">10&euro;</span></div>
+        </div>
+      </div>
+
+      <!-- Otras -->
+      <div id="menu-otras" class="menu-panel hidden">
+        <div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-3">
+          <div class="menu-item flex justify-between items-center px-5 py-4 rounded-xl bg-white/60"><span class="font-semibold" style="color:#3d4723;">Nordik</span><span class="font-mono text-sm font-bold" style="color:#7b8e42;">10&euro;</span></div>
+          <div class="menu-item flex justify-between items-center px-5 py-4 rounded-xl bg-white/60"><span class="font-semibold" style="color:#3d4723;">Tunalia</span><span class="font-mono text-sm font-bold" style="color:#7b8e42;">10&euro;</span></div>
+          <div class="menu-item flex justify-between items-center px-5 py-4 rounded-xl bg-white/60"><span class="font-semibold" style="color:#3d4723;">Saladu</span><span class="font-mono text-sm font-bold" style="color:#7b8e42;">13&euro;</span></div>
+          <div class="menu-item flex justify-between items-center px-5 py-4 rounded-xl bg-white/60"><span class="font-semibold" style="color:#3d4723;">Turkiss</span><span class="font-mono text-sm font-bold" style="color:#7b8e42;">13&euro;</span></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ======================== PARALLAX DIVIDER ======================== -->
+  <section class="parallax-section relative flex items-center justify-center py-32 md:py-44" style="background-image:url('/images/foto-27.jpeg');">
+    <div class="absolute inset-0" style="background:rgba(74,87,41,0.65);"></div>
+    <div class="relative z-10 text-center px-6 max-w-3xl reveal">
+      <svg class="mx-auto mb-6 w-10 h-10" fill="none" viewBox="0 0 40 40"><path d="M10 20C10 14 14 8 20 6C14.5 10 14 14 15 18C16 14 18 10 24 8C19 12 18 16 19 20C21 16 24 12 30 10C24 14 22 18 22 22" stroke="#e8ebd8" stroke-width="1.5" fill="none"/></svg>
+      <blockquote class="font-fraunces text-2xl md:text-4xl font-semibold italic leading-snug" style="color:#fefdf8;">
+        &ldquo;Cada tosta es una obra de arte sobre masa madre, cada cafe una experiencia unica.&rdquo;
+      </blockquote>
+      <p class="font-mono text-sm mt-6 tracking-wider" style="color:#d4d9b8;">ACEITUNA DULCE &middot; ATOCHA, MADRID</p>
+    </div>
+  </section>
+
+  <!-- ======================== GALERIA ======================== -->
+  <section id="galeria" class="py-24 lg:py-32" style="background:#fefdf8;">
+    <div class="max-w-7xl mx-auto px-6">
+      <div class="text-center mb-16 reveal">
+        <span class="font-mono text-xs uppercase tracking-[0.25em] mb-4 inline-block" style="color:#7b8e42;">Momentos</span>
+        <h2 class="font-fraunces text-4xl md:text-5xl font-bold" style="color:#3d4723;">Galeria</h2>
+      </div>
+      <div class="masonry reveal">
+        <div class="masonry-item"><img src="/images/foto-16.jpeg" alt="Galeria" class="w-full rounded-2xl cursor-pointer gallery-img hover:opacity-90 transition-opacity" onclick="openLightbox(0)"></div>
+        <div class="masonry-item"><img src="/images/foto-29.jpeg" alt="Galeria" class="w-full rounded-2xl cursor-pointer gallery-img hover:opacity-90 transition-opacity" onclick="openLightbox(1)"></div>
+        <div class="masonry-item"><img src="/images/foto-1.jpeg" alt="Galeria" class="w-full rounded-2xl cursor-pointer gallery-img hover:opacity-90 transition-opacity" onclick="openLightbox(2)"></div>
+        <div class="masonry-item"><img src="/images/foto-27.jpeg" alt="Galeria" class="w-full rounded-2xl cursor-pointer gallery-img hover:opacity-90 transition-opacity" onclick="openLightbox(3)"></div>
+        <div class="masonry-item"><img src="/images/foto-18.jpeg" alt="Galeria" class="w-full rounded-2xl cursor-pointer gallery-img hover:opacity-90 transition-opacity" onclick="openLightbox(4)"></div>
+        <div class="masonry-item"><img src="/images/foto-13.jpeg" alt="Galeria" class="w-full rounded-2xl cursor-pointer gallery-img hover:opacity-90 transition-opacity" onclick="openLightbox(5)"></div>
+        <div class="masonry-item"><img src="/images/foto-26.jpeg" alt="Galeria" class="w-full rounded-2xl cursor-pointer gallery-img hover:opacity-90 transition-opacity" onclick="openLightbox(6)"></div>
+        <div class="masonry-item"><img src="/images/foto-8.jpeg" alt="Galeria" class="w-full rounded-2xl cursor-pointer gallery-img hover:opacity-90 transition-opacity" onclick="openLightbox(7)"></div>
+        <div class="masonry-item"><img src="/images/foto-22.jpeg" alt="Galeria" class="w-full rounded-2xl cursor-pointer gallery-img hover:opacity-90 transition-opacity" onclick="openLightbox(8)"></div>
+        <div class="masonry-item"><img src="/images/foto-7.jpeg" alt="Galeria" class="w-full rounded-2xl cursor-pointer gallery-img hover:opacity-90 transition-opacity" onclick="openLightbox(9)"></div>
+        <div class="masonry-item"><img src="/images/foto-28.jpeg" alt="Galeria" class="w-full rounded-2xl cursor-pointer gallery-img hover:opacity-90 transition-opacity" onclick="openLightbox(10)"></div>
+        <div class="masonry-item"><img src="/images/foto-21.jpeg" alt="Galeria" class="w-full rounded-2xl cursor-pointer gallery-img hover:opacity-90 transition-opacity" onclick="openLightbox(11)"></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ======================== CONTACTO ======================== -->
+  <section id="contacto" class="py-24 lg:py-32" style="background:#f6f7f0;">
+    <div class="max-w-7xl mx-auto px-6">
+      <div class="text-center mb-16 reveal">
+        <span class="font-mono text-xs uppercase tracking-[0.25em] mb-4 inline-block" style="color:#7b8e42;">Encuentranos</span>
+        <h2 class="font-fraunces text-4xl md:text-5xl font-bold" style="color:#3d4723;">Contacto</h2>
+      </div>
+      <div class="grid lg:grid-cols-2 gap-10">
+        <!-- Map -->
+        <div class="reveal rounded-2xl overflow-hidden shadow-lg h-[400px] lg:h-auto">
+          <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3038.128606843675!2d-3.695408823295743!3d40.40600165629126!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0xd4227e3aa65077d%3A0x5137d408475d32cc!2sAceituna%20dulce%20-%20Specialty%20Coffee!5e0!3m2!1ses!2ses!4v1772797872939!5m2!1ses!2ses" width="100%" height="100%" style="border:0;min-height:400px;" allowfullscreen loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+        </div>
+        <!-- Info cards -->
+        <div class="reveal grid sm:grid-cols-2 gap-4">
+          <!-- Address -->
+          <div class="bg-white rounded-2xl p-6 shadow-sm">
+            <div class="w-10 h-10 rounded-full flex items-center justify-center mb-4" style="background:#e8ebd8;">
+              <svg class="w-5 h-5" fill="none" stroke="#607131" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"/><path stroke-linecap="round" stroke-linejoin="round" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"/></svg>
+            </div>
+            <h3 class="font-semibold mb-1" style="color:#3d4723;">Direccion</h3>
+            <p class="text-sm" style="color:#78716c;">C/ Tortosa 4<br>28045 Madrid</p>
+          </div>
+          <!-- Phone -->
+          <div class="bg-white rounded-2xl p-6 shadow-sm">
+            <div class="w-10 h-10 rounded-full flex items-center justify-center mb-4" style="background:#e8ebd8;">
+              <svg class="w-5 h-5" fill="none" stroke="#607131" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z"/></svg>
+            </div>
+            <h3 class="font-semibold mb-1" style="color:#3d4723;">Telefono</h3>
+            <a href="tel:+34632595868" class="text-sm hover:underline" style="color:#78716c;">632 59 58 68</a>
+          </div>
+          <!-- Email -->
+          <div class="bg-white rounded-2xl p-6 shadow-sm">
+            <div class="w-10 h-10 rounded-full flex items-center justify-center mb-4" style="background:#e8ebd8;">
+              <svg class="w-5 h-5" fill="none" stroke="#607131" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"/></svg>
+            </div>
+            <h3 class="font-semibold mb-1" style="color:#3d4723;">Email</h3>
+            <a href="mailto:aceitunadulce.es@gmail.com" class="text-sm hover:underline break-all" style="color:#78716c;">aceitunadulce.es@gmail.com</a>
+          </div>
+          <!-- Instagram -->
+          <div class="bg-white rounded-2xl p-6 shadow-sm">
+            <div class="w-10 h-10 rounded-full flex items-center justify-center mb-4" style="background:#e8ebd8;">
+              <svg class="w-5 h-5" fill="#607131" viewBox="0 0 24 24"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zM12 0C8.741 0 8.333.014 7.053.072 2.695.272.273 2.69.073 7.052.014 8.333 0 8.741 0 12c0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98C8.333 23.986 8.741 24 12 24c3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98C15.668.014 15.259 0 12 0zm0 5.838a6.162 6.162 0 100 12.324 6.162 6.162 0 000-12.324zM12 16a4 4 0 110-8 4 4 0 010 8zm6.406-11.845a1.44 1.44 0 100 2.881 1.44 1.44 0 000-2.881z"/></svg>
+            </div>
+            <h3 class="font-semibold mb-1" style="color:#3d4723;">Instagram</h3>
+            <a href="https://www.instagram.com/aceitunadulce" target="_blank" class="text-sm hover:underline" style="color:#78716c;">@aceitunadulce</a>
+          </div>
+          <!-- Hours -->
+          <div class="bg-white rounded-2xl p-6 shadow-sm">
+            <div class="w-10 h-10 rounded-full flex items-center justify-center mb-4" style="background:#e8ebd8;">
+              <svg class="w-5 h-5" fill="none" stroke="#607131" stroke-width="2" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+            </div>
+            <h3 class="font-semibold mb-1" style="color:#3d4723;">Horario</h3>
+            <p class="text-sm" style="color:#78716c;">L-S: 9:00 - 20:00<br>Dom: 9:30 - 20:00</p>
+          </div>
+          <!-- WiFi -->
+          <div class="bg-white rounded-2xl p-6 shadow-sm">
+            <div class="w-10 h-10 rounded-full flex items-center justify-center mb-4" style="background:#e8ebd8;">
+              <svg class="w-5 h-5" fill="none" stroke="#607131" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M8.111 16.404a5.5 5.5 0 017.778 0M12 20h.01m-7.08-7.071c3.904-3.905 10.236-3.905 14.14 0M1.394 9.393c5.857-5.858 15.355-5.858 21.213 0"/></svg>
+            </div>
+            <h3 class="font-semibold mb-1" style="color:#3d4723;">WiFi Gratis</h3>
+            <p class="text-sm" style="color:#78716c;">Conectate y disfruta mientras trabajas o descansas</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ======================== FOOTER ======================== -->
+  <footer class="py-12" style="background:#e8ebd8;">
+    <div class="max-w-7xl mx-auto px-6">
+      <div class="flex flex-col md:flex-row items-center justify-between gap-6">
+        <div class="flex items-center gap-3">
+          <img src="/images/logo.png" alt="Logo" class="w-8 h-8 rounded-full">
+          <span class="font-fraunces font-semibold text-lg" style="color:#3d4723;">Aceituna Dulce</span>
+        </div>
+        <div class="flex items-center gap-6">
+          <a href="#nosotros" class="font-mono text-xs uppercase tracking-wider hover:underline" style="color:#607131;">Nosotros</a>
+          <a href="#carta" class="font-mono text-xs uppercase tracking-wider hover:underline" style="color:#607131;">Carta</a>
+          <a href="#galeria" class="font-mono text-xs uppercase tracking-wider hover:underline" style="color:#607131;">Galeria</a>
+          <a href="#contacto" class="font-mono text-xs uppercase tracking-wider hover:underline" style="color:#607131;">Contacto</a>
+        </div>
+        <div class="flex items-center gap-4">
+          <a href="https://www.instagram.com/aceitunadulce" target="_blank" class="hover:opacity-70 transition-opacity" style="color:#607131;">
+            <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zM12 0C8.741 0 8.333.014 7.053.072 2.695.272.273 2.69.073 7.052.014 8.333 0 8.741 0 12c0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98C8.333 23.986 8.741 24 12 24c3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98C15.668.014 15.259 0 12 0zm0 5.838a6.162 6.162 0 100 12.324 6.162 6.162 0 000-12.324zM12 16a4 4 0 110-8 4 4 0 010 8zm6.406-11.845a1.44 1.44 0 100 2.881 1.44 1.44 0 000-2.881z"/></svg>
+          </a>
+          <a href="tel:+34632595868" class="hover:opacity-70 transition-opacity" style="color:#607131;">
+            <svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z"/></svg>
+          </a>
+        </div>
+      </div>
+      <div class="mt-8 pt-6 text-center border-t" style="border-color:#d4d9b8;">
+        <p class="font-mono text-xs" style="color:#9aa868;">Aceituna Dulce &middot; Specialty Coffee & Tostas Artesanales &middot; C/ Tortosa 4, Madrid</p>
+      </div>
+    </div>
+  </footer>
+
+  <!-- ======================== LIGHTBOX ======================== -->
+  <div id="lightbox" class="lightbox-overlay" onclick="closeLightbox(event)">
+    <button class="lightbox-close" onclick="closeLightbox(event)" aria-label="Cerrar">&times;</button>
+    <button class="lightbox-btn lightbox-prev" onclick="prevImage(event)" aria-label="Anterior">&#8249;</button>
+    <img id="lightboxImg" src="" alt="Galeria">
+    <button class="lightbox-btn lightbox-next" onclick="nextImage(event)" aria-label="Siguiente">&#8250;</button>
+  </div>
+
+  <!-- ======================== SCRIPTS ======================== -->
+  <script>
+    // Gallery images for lightbox
+    const galleryImages = [
+      '/images/foto-16.jpeg','/images/foto-29.jpeg','/images/foto-1.jpeg',
+      '/images/foto-27.jpeg','/images/foto-18.jpeg','/images/foto-13.jpeg',
+      '/images/foto-26.jpeg','/images/foto-8.jpeg','/images/foto-22.jpeg',
+      '/images/foto-7.jpeg','/images/foto-28.jpeg','/images/foto-21.jpeg'
+    ];
+    let currentIndex = 0;
+
+    function openLightbox(idx) {
+      currentIndex = idx;
+      document.getElementById('lightboxImg').src = galleryImages[idx];
+      document.getElementById('lightbox').classList.add('active');
+      document.body.style.overflow = 'hidden';
+    }
+    function closeLightbox(e) {
+      if (e.target.id === 'lightbox' || e.target.closest('.lightbox-close')) {
+        document.getElementById('lightbox').classList.remove('active');
+        document.body.style.overflow = '';
+      }
+    }
+    function nextImage(e) {
+      e.stopPropagation();
+      currentIndex = (currentIndex + 1) % galleryImages.length;
+      document.getElementById('lightboxImg').src = galleryImages[currentIndex];
+    }
+    function prevImage(e) {
+      e.stopPropagation();
+      currentIndex = (currentIndex - 1 + galleryImages.length) % galleryImages.length;
+      document.getElementById('lightboxImg').src = galleryImages[currentIndex];
+    }
+
+    // Keyboard nav
+    document.addEventListener('keydown', function(e) {
+      const lb = document.getElementById('lightbox');
+      if (!lb.classList.contains('active')) return;
+      if (e.key === 'Escape') { lb.classList.remove('active'); document.body.style.overflow = ''; }
+      if (e.key === 'ArrowRight') { currentIndex = (currentIndex + 1) % galleryImages.length; document.getElementById('lightboxImg').src = galleryImages[currentIndex]; }
+      if (e.key === 'ArrowLeft') { currentIndex = (currentIndex - 1 + galleryImages.length) % galleryImages.length; document.getElementById('lightboxImg').src = galleryImages[currentIndex]; }
+    });
+
+    // Menu tabs
+    function showMenuTab(tab) {
+      document.querySelectorAll('.menu-panel').forEach(p => p.classList.add('hidden'));
+      document.getElementById('menu-' + tab).classList.remove('hidden');
+      document.querySelectorAll('.menu-tab').forEach(t => {
+        t.style.background = 'transparent';
+        t.style.color = '#607131';
+        t.style.borderColor = '#d4d9b8';
+        t.style.border = '2px solid #d4d9b8';
+      });
+      const active = document.getElementById('tab-' + tab);
+      active.style.background = '#7b8e42';
+      active.style.color = '#fefdf8';
+      active.style.border = '2px solid #7b8e42';
+    }
+
+    // Nav scroll effect
+    window.addEventListener('scroll', function() {
+      const nav = document.getElementById('mainNav');
+      if (window.scrollY > 60) { nav.classList.add('nav-scrolled'); }
+      else { nav.classList.remove('nav-scrolled'); }
+    });
+
+    // Scroll reveal
+    const revealEls = document.querySelectorAll('.reveal');
+    const revealObserver = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('visible');
+          revealObserver.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.12 });
+    revealEls.forEach(el => revealObserver.observe(el));
+
+    // Hamburger
+    const hamburgerBtn = document.getElementById('hamburgerBtn');
+    const mobileMenu = document.getElementById('mobileMenu');
+    hamburgerBtn.addEventListener('click', () => {
+      hamburgerBtn.classList.toggle('active');
+      mobileMenu.classList.toggle('open');
+    });
+    document.querySelectorAll('.mobile-link').forEach(link => {
+      link.addEventListener('click', () => {
+        hamburgerBtn.classList.remove('active');
+        mobileMenu.classList.remove('open');
+      });
+    });
+  </script>
+</body>
+</html>

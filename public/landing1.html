@@ -1,0 +1,615 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Aceituna Dulce — Specialty Coffee & Tostas Artesanales | Madrid</title>
+  <meta name="description" content="Aceituna Dulce: Specialty Coffee y mas de 40 tostas artesanales sobre masa madre junto a la estacion de Atocha, Madrid.">
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;0,9..40,600;0,9..40,700;1,9..40,400&family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;0,800;0,900;1,400;1,700&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            olive: {
+              50: '#f6f7f0',
+              100: '#e8ebd8',
+              200: '#d3d9b4',
+              300: '#b5bf86',
+              400: '#9aaa5f',
+              500: '#7b8e42',
+              600: '#607131',
+              700: '#4a5729',
+              800: '#3d4724',
+            },
+            cream: {
+              50: '#fefdf8',
+              100: '#fdf9ec',
+              200: '#faf1d0',
+            }
+          },
+          fontFamily: {
+            serif: ['Playfair Display', 'Georgia', 'serif'],
+            sans: ['DM Sans', 'system-ui', 'sans-serif'],
+            mono: ['Space Mono', 'monospace'],
+          }
+        }
+      }
+    }
+  </script>
+  <style>
+    html { scroll-behavior: smooth; }
+    body { font-family: 'DM Sans', sans-serif; background: #fefdf8; color: #292524; }
+    .font-serif { font-family: 'Playfair Display', Georgia, serif; }
+    .font-mono { font-family: 'Space Mono', monospace; }
+
+    /* Hero parallax */
+    .hero-bg {
+      background-image: url('/images/foto-16.jpeg');
+      background-size: cover;
+      background-position: center;
+      background-attachment: fixed;
+      background-repeat: no-repeat;
+    }
+    @media (max-width: 768px) {
+      .hero-bg { background-attachment: scroll; }
+    }
+
+    /* Parallax divider */
+    .parallax-divider {
+      background-image: url('/images/foto-27.jpeg');
+      background-size: cover;
+      background-position: center;
+      background-attachment: fixed;
+      background-repeat: no-repeat;
+    }
+    @media (max-width: 768px) {
+      .parallax-divider { background-attachment: scroll; }
+    }
+
+    /* Scroll reveal */
+    .reveal {
+      opacity: 0;
+      transform: translateY(40px);
+      transition: opacity 0.8s cubic-bezier(0.16, 1, 0.3, 1), transform 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+    .reveal.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    /* Menu dotted line */
+    .menu-item-line {
+      border-bottom: 2px dotted #d3d9b4;
+      flex: 1;
+      margin: 0 8px;
+      position: relative;
+      bottom: 4px;
+    }
+
+    /* Lightbox */
+    .lightbox {
+      display: none;
+      position: fixed;
+      inset: 0;
+      z-index: 9999;
+      background: rgba(0,0,0,0.92);
+      align-items: center;
+      justify-content: center;
+    }
+    .lightbox.active { display: flex; }
+    .lightbox img {
+      max-width: 90vw;
+      max-height: 85vh;
+      object-fit: contain;
+      border-radius: 4px;
+    }
+
+    /* Masonry */
+    .masonry {
+      columns: 3;
+      column-gap: 16px;
+    }
+    .masonry-item {
+      break-inside: avoid;
+      margin-bottom: 16px;
+    }
+    @media (max-width: 1024px) {
+      .masonry { columns: 2; }
+    }
+    @media (max-width: 640px) {
+      .masonry { columns: 1; }
+    }
+
+    /* Nav transition */
+    .nav-scrolled {
+      box-shadow: 0 1px 12px rgba(0,0,0,0.08);
+    }
+
+    /* Hamburger lines */
+    .hamburger span {
+      display: block;
+      width: 24px;
+      height: 2px;
+      background: #3d4724;
+      margin: 5px 0;
+      transition: all 0.3s;
+    }
+    .hamburger.open span:nth-child(1) { transform: rotate(45deg) translate(5px, 5px); }
+    .hamburger.open span:nth-child(2) { opacity: 0; }
+    .hamburger.open span:nth-child(3) { transform: rotate(-45deg) translate(5px, -5px); }
+  </style>
+</head>
+<body class="antialiased">
+
+  <!-- ============ NAVIGATION ============ -->
+  <nav id="navbar" class="fixed top-0 left-0 right-0 z-50 transition-all duration-300 bg-olive-50/80 backdrop-blur-md">
+    <div class="max-w-7xl mx-auto px-6 py-4 flex items-center justify-between">
+      <a href="#hero" class="flex items-center gap-3">
+        <img src="/images/logo.png" alt="Aceituna Dulce" class="h-10 w-auto">
+        <span class="font-serif text-xl font-bold text-olive-800 hidden sm:inline">Aceituna Dulce</span>
+      </a>
+      <div class="hidden md:flex items-center gap-8">
+        <a href="#nosotros" class="font-mono text-xs uppercase tracking-widest text-olive-700 hover:text-olive-500 transition-colors">Nosotros</a>
+        <a href="#carta" class="font-mono text-xs uppercase tracking-widest text-olive-700 hover:text-olive-500 transition-colors">Carta</a>
+        <a href="#galeria" class="font-mono text-xs uppercase tracking-widest text-olive-700 hover:text-olive-500 transition-colors">Galeria</a>
+        <a href="#contacto" class="font-mono text-xs uppercase tracking-widest text-olive-700 hover:text-olive-500 transition-colors">Contacto</a>
+      </div>
+      <button id="menuBtn" class="hamburger md:hidden focus:outline-none" aria-label="Menu">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+    <!-- Mobile menu -->
+    <div id="mobileMenu" class="hidden md:hidden bg-olive-50/95 backdrop-blur-md border-t border-olive-100">
+      <div class="flex flex-col items-center gap-6 py-8">
+        <a href="#nosotros" class="mobile-link font-mono text-sm uppercase tracking-widest text-olive-700">Nosotros</a>
+        <a href="#carta" class="mobile-link font-mono text-sm uppercase tracking-widest text-olive-700">Carta</a>
+        <a href="#galeria" class="mobile-link font-mono text-sm uppercase tracking-widest text-olive-700">Galeria</a>
+        <a href="#contacto" class="mobile-link font-mono text-sm uppercase tracking-widest text-olive-700">Contacto</a>
+      </div>
+    </div>
+  </nav>
+
+  <!-- ============ HERO ============ -->
+  <section id="hero" class="hero-bg relative h-screen flex items-end">
+    <!-- Warm cream gradient overlay at bottom -->
+    <div class="absolute inset-0 bg-gradient-to-t from-cream-50 via-cream-50/40 to-transparent"></div>
+    <div class="relative z-10 w-full max-w-7xl mx-auto px-6 pb-16 md:pb-24">
+      <p class="font-mono text-xs md:text-sm uppercase tracking-[0.3em] text-olive-600 mb-3">Specialty Coffee &amp; Tostas Artesanales</p>
+      <h1 class="font-serif text-6xl sm:text-7xl md:text-8xl lg:text-9xl font-black text-stone-900 leading-[0.9] mb-6">
+        Aceituna<br>Dulce
+      </h1>
+      <p class="text-stone-600 text-lg md:text-xl mb-8 flex items-center gap-2">
+        <svg class="w-5 h-5 text-olive-500" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"/><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"/></svg>
+        Junto a Atocha, Madrid
+      </p>
+      <div class="flex flex-wrap gap-4">
+        <a href="#carta" class="bg-olive-600 hover:bg-olive-700 text-white font-mono text-sm uppercase tracking-wider px-8 py-4 rounded-full transition-colors">Ver Carta</a>
+        <a href="#contacto" class="border-2 border-olive-600 text-olive-700 hover:bg-olive-600 hover:text-white font-mono text-sm uppercase tracking-wider px-8 py-4 rounded-full transition-colors">Contacto</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ CONTENT WRAPPER (slides over fixed bg) ============ -->
+  <div class="relative z-10 bg-cream-50">
+
+    <!-- ============ NOSOTROS ============ -->
+    <section id="nosotros" class="py-24 md:py-32">
+      <div class="max-w-7xl mx-auto px-6">
+        <div class="grid lg:grid-cols-2 gap-16 items-center">
+          <!-- Text -->
+          <div class="reveal">
+            <p class="font-mono text-xs uppercase tracking-[0.3em] text-olive-600 mb-4">Sobre Nosotros</p>
+            <h2 class="font-serif text-4xl md:text-5xl lg:text-6xl font-bold text-stone-900 mb-8 leading-tight">
+              Donde el pan de masa madre se encuentra con la creatividad
+            </h2>
+            <p class="text-stone-600 text-lg leading-relaxed mb-6">
+              En Aceituna Dulce creemos que una buena tosta es mucho mas que pan con algo encima. Cada una de nuestras mas de 40 creaciones esta elaborada sobre pan de masa madre artesanal, combinando ingredientes frescos y de temporada con recetas que fusionan lo clasico y lo innovador.
+            </p>
+            <p class="text-stone-600 text-lg leading-relaxed mb-10">
+              A pocos pasos de la estacion de Atocha, nuestro espacio es el lugar perfecto para disfrutar de un specialty coffee, un brunch entre amigos o un momento de calma con WiFi gratis y la mejor musica de fondo.
+            </p>
+            <!-- Stats -->
+            <div class="grid grid-cols-3 gap-6">
+              <div class="text-center p-4 bg-olive-50 rounded-2xl">
+                <p class="font-serif text-3xl md:text-4xl font-bold text-olive-600">40+</p>
+                <p class="font-mono text-xs uppercase tracking-wider text-stone-500 mt-1">Tostas</p>
+              </div>
+              <div class="text-center p-4 bg-olive-50 rounded-2xl">
+                <p class="font-serif text-3xl md:text-4xl font-bold text-olive-600">100%</p>
+                <p class="font-mono text-xs uppercase tracking-wider text-stone-500 mt-1">Masa Madre</p>
+              </div>
+              <div class="text-center p-4 bg-olive-50 rounded-2xl">
+                <p class="font-serif text-2xl md:text-3xl font-bold text-olive-600">Specialty</p>
+                <p class="font-mono text-xs uppercase tracking-wider text-stone-500 mt-1">Coffee</p>
+              </div>
+            </div>
+          </div>
+          <!-- Photo grid offset -->
+          <div class="reveal grid grid-cols-2 gap-4">
+            <div class="space-y-4">
+              <img src="/images/foto-1.jpeg" alt="Tosta artesanal" class="w-full h-48 md:h-64 object-cover rounded-2xl">
+              <img src="/images/foto-8.jpeg" alt="Interior del cafe" class="w-full h-56 md:h-72 object-cover rounded-2xl">
+            </div>
+            <div class="space-y-4 mt-8">
+              <img src="/images/foto-13.jpeg" alt="Specialty coffee" class="w-full h-56 md:h-72 object-cover rounded-2xl">
+              <img src="/images/foto-22.jpeg" alt="Ingredientes frescos" class="w-full h-48 md:h-64 object-cover rounded-2xl">
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============ CARTA ============ -->
+    <section id="carta" class="py-24 md:py-32 bg-olive-50">
+      <div class="max-w-5xl mx-auto px-6">
+        <div class="text-center mb-16 reveal">
+          <p class="font-mono text-xs uppercase tracking-[0.3em] text-olive-600 mb-4">Nuestra Carta</p>
+          <h2 class="font-serif text-4xl md:text-5xl lg:text-6xl font-bold text-stone-900 leading-tight">
+            Mas de 40 tostas para descubrir
+          </h2>
+        </div>
+
+        <!-- TOSTAS SALADAS -->
+        <div class="mb-16 reveal">
+          <h3 class="font-serif text-2xl md:text-3xl font-bold text-olive-600 mb-2">Tostas Saladas</h3>
+          <p class="font-mono text-xs uppercase tracking-wider text-stone-400 mb-8">29 variedades</p>
+          <div class="grid md:grid-cols-2 gap-x-12 gap-y-3">
+            <div class="flex items-baseline"><span class="text-stone-800 font-medium">Tumaca</span><span class="menu-item-line"></span><span class="font-mono text-olive-600 font-bold">3.50</span></div>
+            <div class="flex items-baseline"><span class="text-stone-800 font-medium">Avocate</span><span class="menu-item-line"></span><span class="font-mono text-olive-600 font-bold">7</span></div>
+            <div class="flex items-baseline"><span class="text-stone-800 font-medium">Mixta</span><span class="menu-item-line"></span><span class="font-mono text-olive-600 font-bold">7</span></div>
+            <div class="flex items-baseline"><span class="text-stone-800 font-medium">Vitalica</span><span class="menu-item-line"></span><span class="font-mono text-olive-600 font-bold">7</span></div>
+            <div class="flex items-baseline"><span class="text-stone-800 font-medium">Alegria</span><span class="menu-item-line"></span><span class="font-mono text-olive-600 font-bold">8</span></div>
+            <div class="flex items-baseline"><span class="text-stone-800 font-medium">Campestre</span><span class="menu-item-line"></span><span class="font-mono text-olive-600 font-bold">8</span></div>
+            <div class="flex items-baseline"><span class="text-stone-800 font-medium">Dulcetta</span><span class="menu-item-line"></span><span class="font-mono text-olive-600 font-bold">8</span></div>
+            <div class="flex items-baseline"><span class="text-stone-800 font-medium">Granjera</span><span class="menu-item-line"></span><span class="font-mono text-olive-600 font-bold">8</span></div>
+            <div class="flex items-baseline"><span class="text-stone-800 font-medium">Mediterranea</span><span class="menu-item-line"></span><span class="font-mono text-olive-600 font-bold">9</span></div>
+            <div class="flex items-baseline"><span class="text-stone-800 font-medium">Serranova</span><span class="menu-item-line"></span><span class="font-mono text-olive-600 font-bold">8</span></div>
+            <div class="flex items-baseline"><span class="text-stone-800 font-medium">Turry</span><span class="menu-item-line"></span><span class="font-mono text-olive-600 font-bold">8</span></div>
+            <div class="flex items-baseline"><span class="text-stone-800 font-medium">Ahumada</span><span class="menu-item-line"></span><span class="font-mono text-olive-600 font-bold">10</span></div>
+            <div class="flex items-baseline"><span class="text-stone-800 font-medium">Armonia</span><span class="menu-item-line"></span><span class="font-mono text-olive-600 font-bold">10</span></div>
+            <div class="flex items-baseline"><span class="text-stone-800 font-medium">Briole</span><span class="menu-item-line"></span><span class="font-mono text-olive-600 font-bold">10</span></div>
+            <div class="flex items-baseline"><span class="text-stone-800 font-medium">Cantabria</span><span class="menu-item-line"></span><span class="font-mono text-olive-600 font-bold">10</span></div>
+            <div class="flex items-baseline"><span class="text-stone-800 font-medium">Caprese</span><span class="menu-item-line"></span><span class="font-mono text-olive-600 font-bold">10</span></div>
+            <div class="flex items-baseline"><span class="text-stone-800 font-medium">Costera</span><span class="menu-item-line"></span><span class="font-mono text-olive-600 font-bold">10</span></div>
+            <div class="flex items-baseline"><span class="text-stone-800 font-medium">Sabra</span><span class="menu-item-line"></span><span class="font-mono text-olive-600 font-bold">10</span></div>
+            <div class="flex items-baseline"><span class="text-stone-800 font-medium">Atlantica</span><span class="menu-item-line"></span><span class="font-mono text-olive-600 font-bold">12</span></div>
+            <div class="flex items-baseline"><span class="text-stone-800 font-medium">Fresatte</span><span class="menu-item-line"></span><span class="font-mono text-olive-600 font-bold">12</span></div>
+            <div class="flex items-baseline"><span class="text-stone-800 font-medium">Iberica</span><span class="menu-item-line"></span><span class="font-mono text-olive-600 font-bold">12</span></div>
+            <div class="flex items-baseline"><span class="text-stone-800 font-medium">Marinera</span><span class="menu-item-line"></span><span class="font-mono text-olive-600 font-bold">12</span></div>
+            <div class="flex items-baseline"><span class="text-stone-800 font-medium">Oceanica</span><span class="menu-item-line"></span><span class="font-mono text-olive-600 font-bold">12</span></div>
+            <div class="flex items-baseline"><span class="text-stone-800 font-medium">Salmary</span><span class="menu-item-line"></span><span class="font-mono text-olive-600 font-bold">12</span></div>
+            <div class="flex items-baseline"><span class="text-stone-800 font-medium">Salmore</span><span class="menu-item-line"></span><span class="font-mono text-olive-600 font-bold">12</span></div>
+            <div class="flex items-baseline"><span class="text-stone-800 font-medium">Serrania</span><span class="menu-item-line"></span><span class="font-mono text-olive-600 font-bold">12</span></div>
+            <div class="flex items-baseline"><span class="text-stone-800 font-medium">Suprema</span><span class="menu-item-line"></span><span class="font-mono text-olive-600 font-bold">12</span></div>
+            <div class="flex items-baseline"><span class="text-stone-800 font-medium">Tunali</span><span class="menu-item-line"></span><span class="font-mono text-olive-600 font-bold">12</span></div>
+            <div class="flex items-baseline"><span class="text-stone-800 font-medium">Vaquera</span><span class="menu-item-line"></span><span class="font-mono text-olive-600 font-bold">12</span></div>
+          </div>
+        </div>
+
+        <!-- TOSTAS DULCES -->
+        <div class="mb-16 reveal">
+          <h3 class="font-serif text-2xl md:text-3xl font-bold text-olive-600 mb-2">Tostas Dulces</h3>
+          <p class="font-mono text-xs uppercase tracking-wider text-stone-400 mb-8">7 variedades</p>
+          <div class="grid md:grid-cols-2 gap-x-12 gap-y-3">
+            <div class="flex items-baseline"><span class="text-stone-800 font-medium">Berry</span><span class="menu-item-line"></span><span class="font-mono text-olive-600 font-bold">4</span></div>
+            <div class="flex items-baseline"><span class="text-stone-800 font-medium">Exotica</span><span class="menu-item-line"></span><span class="font-mono text-olive-600 font-bold">7</span></div>
+            <div class="flex items-baseline"><span class="text-stone-800 font-medium">Mielitas</span><span class="menu-item-line"></span><span class="font-mono text-olive-600 font-bold">7</span></div>
+            <div class="flex items-baseline"><span class="text-stone-800 font-medium">Nutrely</span><span class="menu-item-line"></span><span class="font-mono text-olive-600 font-bold">7</span></div>
+            <div class="flex items-baseline"><span class="text-stone-800 font-medium">Pasion</span><span class="menu-item-line"></span><span class="font-mono text-olive-600 font-bold">7</span></div>
+            <div class="flex items-baseline"><span class="text-stone-800 font-medium">Deseo</span><span class="menu-item-line"></span><span class="font-mono text-olive-600 font-bold">8</span></div>
+            <div class="flex items-baseline"><span class="text-stone-800 font-medium">Fusion</span><span class="menu-item-line"></span><span class="font-mono text-olive-600 font-bold">8</span></div>
+          </div>
+        </div>
+
+        <!-- BOWLS -->
+        <div class="mb-16 reveal">
+          <h3 class="font-serif text-2xl md:text-3xl font-bold text-olive-600 mb-2">Bowls</h3>
+          <p class="font-mono text-xs uppercase tracking-wider text-stone-400 mb-8">3 variedades</p>
+          <div class="grid md:grid-cols-2 gap-x-12 gap-y-3">
+            <div class="flex items-baseline"><span class="text-stone-800 font-medium">Frutella</span><span class="menu-item-line"></span><span class="font-mono text-olive-600 font-bold">9</span></div>
+            <div class="flex items-baseline"><span class="text-stone-800 font-medium">Acai</span><span class="menu-item-line"></span><span class="font-mono text-olive-600 font-bold">10</span></div>
+            <div class="flex items-baseline"><span class="text-stone-800 font-medium">Caribean</span><span class="menu-item-line"></span><span class="font-mono text-olive-600 font-bold">10</span></div>
+          </div>
+        </div>
+
+        <!-- OTRAS ESPECIALIDADES -->
+        <div class="reveal">
+          <h3 class="font-serif text-2xl md:text-3xl font-bold text-olive-600 mb-2">Otras Especialidades</h3>
+          <p class="font-mono text-xs uppercase tracking-wider text-stone-400 mb-8">4 variedades</p>
+          <div class="grid md:grid-cols-2 gap-x-12 gap-y-3">
+            <div class="flex items-baseline"><span class="text-stone-800 font-medium">Nordik</span><span class="menu-item-line"></span><span class="font-mono text-olive-600 font-bold">10</span></div>
+            <div class="flex items-baseline"><span class="text-stone-800 font-medium">Tunalia</span><span class="menu-item-line"></span><span class="font-mono text-olive-600 font-bold">10</span></div>
+            <div class="flex items-baseline"><span class="text-stone-800 font-medium">Saladu</span><span class="menu-item-line"></span><span class="font-mono text-olive-600 font-bold">13</span></div>
+            <div class="flex items-baseline"><span class="text-stone-800 font-medium">Turkiss</span><span class="menu-item-line"></span><span class="font-mono text-olive-600 font-bold">13</span></div>
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- ============ PARALLAX DIVIDER ============ -->
+    <section class="parallax-divider relative h-[60vh] md:h-[70vh] flex items-center justify-center">
+      <div class="absolute inset-0 bg-cream-50/30"></div>
+      <div class="relative z-10 bg-cream-50/85 backdrop-blur-sm rounded-3xl px-8 md:px-16 py-10 md:py-14 max-w-2xl mx-6 text-center reveal">
+        <svg class="w-10 h-10 text-olive-300 mx-auto mb-4" fill="currentColor" viewBox="0 0 24 24"><path d="M14.017 21v-7.391c0-5.704 3.731-9.57 8.983-10.609l.995 2.151c-2.432.917-3.995 3.638-3.995 5.849h4v10h-9.983zm-14.017 0v-7.391c0-5.704 3.748-9.57 9-10.609l.996 2.151c-2.433.917-3.996 3.638-3.996 5.849h3.983v10h-9.983z"/></svg>
+        <p class="font-serif text-2xl md:text-3xl text-stone-800 italic leading-relaxed mb-4">
+          Cada tosta cuenta una historia, cada cafe despierta una sonrisa.
+        </p>
+        <p class="font-mono text-xs uppercase tracking-[0.3em] text-olive-600">Aceituna Dulce</p>
+      </div>
+    </section>
+
+    <!-- ============ GALERIA ============ -->
+    <section id="galeria" class="py-24 md:py-32 bg-cream-50">
+      <div class="max-w-7xl mx-auto px-6">
+        <div class="text-center mb-16 reveal">
+          <p class="font-mono text-xs uppercase tracking-[0.3em] text-olive-600 mb-4">Galeria</p>
+          <h2 class="font-serif text-4xl md:text-5xl lg:text-6xl font-bold text-stone-900 leading-tight">
+            Un vistazo a nuestro mundo
+          </h2>
+        </div>
+        <div class="masonry reveal">
+          <div class="masonry-item cursor-pointer gallery-img" data-index="0">
+            <img src="/images/foto-16.jpeg" alt="Galeria 1" class="w-full rounded-2xl hover:scale-[1.02] transition-transform duration-300" loading="lazy">
+          </div>
+          <div class="masonry-item cursor-pointer gallery-img" data-index="1">
+            <img src="/images/foto-29.jpeg" alt="Galeria 2" class="w-full rounded-2xl hover:scale-[1.02] transition-transform duration-300" loading="lazy">
+          </div>
+          <div class="masonry-item cursor-pointer gallery-img" data-index="2">
+            <img src="/images/foto-1.jpeg" alt="Galeria 3" class="w-full rounded-2xl hover:scale-[1.02] transition-transform duration-300" loading="lazy">
+          </div>
+          <div class="masonry-item cursor-pointer gallery-img" data-index="3">
+            <img src="/images/foto-27.jpeg" alt="Galeria 4" class="w-full rounded-2xl hover:scale-[1.02] transition-transform duration-300" loading="lazy">
+          </div>
+          <div class="masonry-item cursor-pointer gallery-img" data-index="4">
+            <img src="/images/foto-18.jpeg" alt="Galeria 5" class="w-full rounded-2xl hover:scale-[1.02] transition-transform duration-300" loading="lazy">
+          </div>
+          <div class="masonry-item cursor-pointer gallery-img" data-index="5">
+            <img src="/images/foto-13.jpeg" alt="Galeria 6" class="w-full rounded-2xl hover:scale-[1.02] transition-transform duration-300" loading="lazy">
+          </div>
+          <div class="masonry-item cursor-pointer gallery-img" data-index="6">
+            <img src="/images/foto-26.jpeg" alt="Galeria 7" class="w-full rounded-2xl hover:scale-[1.02] transition-transform duration-300" loading="lazy">
+          </div>
+          <div class="masonry-item cursor-pointer gallery-img" data-index="7">
+            <img src="/images/foto-8.jpeg" alt="Galeria 8" class="w-full rounded-2xl hover:scale-[1.02] transition-transform duration-300" loading="lazy">
+          </div>
+          <div class="masonry-item cursor-pointer gallery-img" data-index="8">
+            <img src="/images/foto-22.jpeg" alt="Galeria 9" class="w-full rounded-2xl hover:scale-[1.02] transition-transform duration-300" loading="lazy">
+          </div>
+          <div class="masonry-item cursor-pointer gallery-img" data-index="9">
+            <img src="/images/foto-7.jpeg" alt="Galeria 10" class="w-full rounded-2xl hover:scale-[1.02] transition-transform duration-300" loading="lazy">
+          </div>
+          <div class="masonry-item cursor-pointer gallery-img" data-index="10">
+            <img src="/images/foto-28.jpeg" alt="Galeria 11" class="w-full rounded-2xl hover:scale-[1.02] transition-transform duration-300" loading="lazy">
+          </div>
+          <div class="masonry-item cursor-pointer gallery-img" data-index="11">
+            <img src="/images/foto-21.jpeg" alt="Galeria 12" class="w-full rounded-2xl hover:scale-[1.02] transition-transform duration-300" loading="lazy">
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============ LIGHTBOX ============ -->
+    <div id="lightbox" class="lightbox">
+      <button id="lbClose" class="absolute top-6 right-6 text-white/80 hover:text-white text-4xl z-10 cursor-pointer" aria-label="Cerrar">&times;</button>
+      <button id="lbPrev" class="absolute left-4 md:left-8 text-white/80 hover:text-white text-5xl z-10 cursor-pointer" aria-label="Anterior">&#8249;</button>
+      <button id="lbNext" class="absolute right-4 md:right-8 text-white/80 hover:text-white text-5xl z-10 cursor-pointer" aria-label="Siguiente">&#8250;</button>
+      <img id="lbImg" src="" alt="Lightbox image">
+    </div>
+
+    <!-- ============ CONTACTO ============ -->
+    <section id="contacto" class="py-24 md:py-32 bg-olive-50">
+      <div class="max-w-7xl mx-auto px-6">
+        <div class="text-center mb-16 reveal">
+          <p class="font-mono text-xs uppercase tracking-[0.3em] text-olive-600 mb-4">Contacto</p>
+          <h2 class="font-serif text-4xl md:text-5xl lg:text-6xl font-bold text-stone-900 leading-tight">
+            Ven a visitarnos
+          </h2>
+        </div>
+        <div class="grid lg:grid-cols-2 gap-12 reveal">
+          <!-- Map -->
+          <div class="rounded-3xl overflow-hidden shadow-lg h-[400px] lg:h-full min-h-[400px]">
+            <iframe
+              src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3038.128606843675!2d-3.695408823295743!3d40.40600165629126!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0xd4227e3aa65077d%3A0x5137d408475d32cc!2sAceituna%20dulce%20-%20Specialty%20Coffee!5e0!3m2!1ses!2ses!4v1772797872939!5m2!1ses!2ses"
+              width="100%" height="100%" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"
+              title="Ubicacion de Aceituna Dulce en Google Maps">
+            </iframe>
+          </div>
+          <!-- Info cards -->
+          <div class="grid sm:grid-cols-2 gap-6">
+            <!-- Direccion -->
+            <div class="bg-cream-50 rounded-2xl p-6 shadow-sm">
+              <div class="w-12 h-12 bg-olive-100 rounded-xl flex items-center justify-center mb-4">
+                <svg class="w-6 h-6 text-olive-600" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"/><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"/></svg>
+              </div>
+              <h4 class="font-serif text-lg font-bold text-stone-900 mb-1">Direccion</h4>
+              <p class="text-stone-600">C/ Tortosa 4<br>28045 Madrid</p>
+            </div>
+            <!-- Telefono -->
+            <div class="bg-cream-50 rounded-2xl p-6 shadow-sm">
+              <div class="w-12 h-12 bg-olive-100 rounded-xl flex items-center justify-center mb-4">
+                <svg class="w-6 h-6 text-olive-600" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z"/></svg>
+              </div>
+              <h4 class="font-serif text-lg font-bold text-stone-900 mb-1">Telefono</h4>
+              <a href="tel:+34632595868" class="text-olive-600 hover:text-olive-700 transition-colors">632 59 58 68</a>
+            </div>
+            <!-- Email -->
+            <div class="bg-cream-50 rounded-2xl p-6 shadow-sm">
+              <div class="w-12 h-12 bg-olive-100 rounded-xl flex items-center justify-center mb-4">
+                <svg class="w-6 h-6 text-olive-600" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"/></svg>
+              </div>
+              <h4 class="font-serif text-lg font-bold text-stone-900 mb-1">Email</h4>
+              <a href="mailto:aceitunadulce.es@gmail.com" class="text-olive-600 hover:text-olive-700 transition-colors text-sm break-all">aceitunadulce.es@gmail.com</a>
+            </div>
+            <!-- Instagram -->
+            <div class="bg-cream-50 rounded-2xl p-6 shadow-sm">
+              <div class="w-12 h-12 bg-olive-100 rounded-xl flex items-center justify-center mb-4">
+                <svg class="w-6 h-6 text-olive-600" fill="currentColor" viewBox="0 0 24 24"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zM12 0C8.741 0 8.333.014 7.053.072 2.695.272.273 2.69.073 7.052.014 8.333 0 8.741 0 12c0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98C8.333 23.986 8.741 24 12 24c3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98C15.668.014 15.259 0 12 0zm0 5.838a6.162 6.162 0 100 12.324 6.162 6.162 0 000-12.324zM12 16a4 4 0 110-8 4 4 0 010 8zm6.406-11.845a1.44 1.44 0 100 2.881 1.44 1.44 0 000-2.881z"/></svg>
+              </div>
+              <h4 class="font-serif text-lg font-bold text-stone-900 mb-1">Instagram</h4>
+              <a href="https://instagram.com/aceitunadulce" target="_blank" rel="noopener" class="text-olive-600 hover:text-olive-700 transition-colors">@aceitunadulce</a>
+            </div>
+            <!-- Horario -->
+            <div class="bg-cream-50 rounded-2xl p-6 shadow-sm">
+              <div class="w-12 h-12 bg-olive-100 rounded-xl flex items-center justify-center mb-4">
+                <svg class="w-6 h-6 text-olive-600" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
+              </div>
+              <h4 class="font-serif text-lg font-bold text-stone-900 mb-1">Horario</h4>
+              <p class="text-stone-600 text-sm">L-S: 9:00 - 20:00<br>Dom: 9:30 - 20:00</p>
+            </div>
+            <!-- WiFi -->
+            <div class="bg-cream-50 rounded-2xl p-6 shadow-sm">
+              <div class="w-12 h-12 bg-olive-100 rounded-xl flex items-center justify-center mb-4">
+                <svg class="w-6 h-6 text-olive-600" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8.111 16.404a5.5 5.5 0 017.778 0M12 20h.01m-7.08-7.071c3.904-3.905 10.236-3.905 14.141 0M1.394 9.393c5.857-5.858 15.355-5.858 21.213 0"/></svg>
+              </div>
+              <h4 class="font-serif text-lg font-bold text-stone-900 mb-1">WiFi</h4>
+              <p class="text-stone-600 text-sm">WiFi gratis<br>para clientes</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============ FOOTER ============ -->
+    <footer class="bg-olive-800 text-olive-100 py-16">
+      <div class="max-w-7xl mx-auto px-6">
+        <div class="grid md:grid-cols-3 gap-12 mb-12">
+          <!-- Logo & tagline -->
+          <div>
+            <img src="/images/logo.png" alt="Aceituna Dulce" class="h-12 w-auto mb-4 brightness-200">
+            <p class="font-serif text-2xl font-bold text-white mb-2">Aceituna Dulce</p>
+            <p class="text-olive-300 text-sm">Specialty Coffee &amp; Tostas Artesanales junto a Atocha, Madrid.</p>
+          </div>
+          <!-- Nav -->
+          <div>
+            <h4 class="font-mono text-xs uppercase tracking-[0.3em] text-olive-300 mb-4">Navegacion</h4>
+            <ul class="space-y-2">
+              <li><a href="#hero" class="text-olive-200 hover:text-white transition-colors">Inicio</a></li>
+              <li><a href="#nosotros" class="text-olive-200 hover:text-white transition-colors">Nosotros</a></li>
+              <li><a href="#carta" class="text-olive-200 hover:text-white transition-colors">Carta</a></li>
+              <li><a href="#galeria" class="text-olive-200 hover:text-white transition-colors">Galeria</a></li>
+              <li><a href="#contacto" class="text-olive-200 hover:text-white transition-colors">Contacto</a></li>
+            </ul>
+          </div>
+          <!-- Contact -->
+          <div>
+            <h4 class="font-mono text-xs uppercase tracking-[0.3em] text-olive-300 mb-4">Contacto</h4>
+            <ul class="space-y-2 text-olive-200 text-sm">
+              <li>C/ Tortosa 4, 28045 Madrid</li>
+              <li><a href="tel:+34632595868" class="hover:text-white transition-colors">632 59 58 68</a></li>
+              <li><a href="mailto:aceitunadulce.es@gmail.com" class="hover:text-white transition-colors">aceitunadulce.es@gmail.com</a></li>
+              <li><a href="https://instagram.com/aceitunadulce" target="_blank" rel="noopener" class="hover:text-white transition-colors">@aceitunadulce</a></li>
+            </ul>
+          </div>
+        </div>
+        <div class="border-t border-olive-700 pt-8 text-center">
+          <p class="text-olive-400 text-sm">&copy; 2026 Aceituna Dulce. Todos los derechos reservados.</p>
+        </div>
+      </div>
+    </footer>
+
+  </div><!-- /content wrapper -->
+
+  <!-- ============ SCRIPTS ============ -->
+  <script>
+    // === Nav shadow on scroll ===
+    const navbar = document.getElementById('navbar');
+    window.addEventListener('scroll', () => {
+      if (window.scrollY > 50) {
+        navbar.classList.add('nav-scrolled');
+      } else {
+        navbar.classList.remove('nav-scrolled');
+      }
+    });
+
+    // === Mobile menu ===
+    const menuBtn = document.getElementById('menuBtn');
+    const mobileMenu = document.getElementById('mobileMenu');
+    menuBtn.addEventListener('click', () => {
+      menuBtn.classList.toggle('open');
+      mobileMenu.classList.toggle('hidden');
+    });
+    document.querySelectorAll('.mobile-link').forEach(link => {
+      link.addEventListener('click', () => {
+        menuBtn.classList.remove('open');
+        mobileMenu.classList.add('hidden');
+      });
+    });
+
+    // === Scroll reveal (IntersectionObserver) ===
+    const revealEls = document.querySelectorAll('.reveal');
+    const revealObserver = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('visible');
+          revealObserver.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.1, rootMargin: '0px 0px -40px 0px' });
+    revealEls.forEach(el => revealObserver.observe(el));
+
+    // === Lightbox ===
+    const galleryImages = [
+      '/images/foto-16.jpeg',
+      '/images/foto-29.jpeg',
+      '/images/foto-1.jpeg',
+      '/images/foto-27.jpeg',
+      '/images/foto-18.jpeg',
+      '/images/foto-13.jpeg',
+      '/images/foto-26.jpeg',
+      '/images/foto-8.jpeg',
+      '/images/foto-22.jpeg',
+      '/images/foto-7.jpeg',
+      '/images/foto-28.jpeg',
+      '/images/foto-21.jpeg'
+    ];
+    let currentIndex = 0;
+    const lightbox = document.getElementById('lightbox');
+    const lbImg = document.getElementById('lbImg');
+    const lbClose = document.getElementById('lbClose');
+    const lbPrev = document.getElementById('lbPrev');
+    const lbNext = document.getElementById('lbNext');
+
+    function openLightbox(index) {
+      currentIndex = index;
+      lbImg.src = galleryImages[currentIndex];
+      lightbox.classList.add('active');
+      document.body.style.overflow = 'hidden';
+    }
+    function closeLightbox() {
+      lightbox.classList.remove('active');
+      document.body.style.overflow = '';
+    }
+    function showPrev() {
+      currentIndex = (currentIndex - 1 + galleryImages.length) % galleryImages.length;
+      lbImg.src = galleryImages[currentIndex];
+    }
+    function showNext() {
+      currentIndex = (currentIndex + 1) % galleryImages.length;
+      lbImg.src = galleryImages[currentIndex];
+    }
+
+    document.querySelectorAll('.gallery-img').forEach(el => {
+      el.addEventListener('click', () => openLightbox(parseInt(el.dataset.index)));
+    });
+    lbClose.addEventListener('click', closeLightbox);
+    lbPrev.addEventListener('click', showPrev);
+    lbNext.addEventListener('click', showNext);
+    lightbox.addEventListener('click', (e) => {
+      if (e.target === lightbox) closeLightbox();
+    });
+
+    // Keyboard navigation
+    document.addEventListener('keydown', (e) => {
+      if (!lightbox.classList.contains('active')) return;
+      if (e.key === 'Escape') closeLightbox();
+      if (e.key === 'ArrowLeft') showPrev();
+      if (e.key === 'ArrowRight') showNext();
+    });
+  </script>
+</body>
+</html>
